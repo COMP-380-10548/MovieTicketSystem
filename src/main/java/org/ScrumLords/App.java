@@ -1,4 +1,4 @@
-package org.Scrumlords;
+package org.ScrumLords;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
