@@ -1,4 +1,4 @@
-module org.Scrumlords {
+module org.ScrumLords {
     requires javafx.controls;
-    exports org.Scrumlords;
+    exports org.ScrumLords;
 }

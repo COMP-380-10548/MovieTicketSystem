@@ -1,4 +1,4 @@
-package org.Scrumlords;
+package org.ScrumLords;
 
 public class SystemInfo {
 
