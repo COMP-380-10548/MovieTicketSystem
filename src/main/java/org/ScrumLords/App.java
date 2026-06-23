@@ -34,9 +34,21 @@ public class App extends Application {
         Label statusLabel = new Label("Status: waiting for login...");
 
         loginButton.setOnAction(e -> {
-            loginButton.setText("Clicked!");
-            statusLabel.setText("Status: Login button clicked");
-            System.out.println("Login button clicked");
+
+            String username = usernameField.getText();
+            String password = passwordField.getText();
+
+            if (username.isBlank()) {
+                statusLabel.setText("Error: Username required");
+                return;
+            }
+
+            if (password.isBlank()) {
+                statusLabel.setText("Error: Password required");
+                return;
+            }
+
+            statusLabel.setText("Validation successful");
         });
 
         VBox layout = new VBox(10);
