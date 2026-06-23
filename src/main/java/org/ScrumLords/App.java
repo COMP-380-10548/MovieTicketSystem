@@ -3,7 +3,6 @@ package org.ScrumLords;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -49,6 +48,7 @@ public class App extends Application {
             }
 
             statusLabel.setText("Validation successful");
+            stage.setScene(createMainPageScene(stage));
         });
 
         VBox layout = new VBox(10);
@@ -69,6 +69,70 @@ public class App extends Application {
         stage.setTitle("Movie Ticket System");
         stage.setScene(scene);
         stage.show();
+    }
+
+    private Scene createMainPageScene(Stage stage) {
+        Label titleLabel = new Label("Main Page");
+
+        Button viewMovieDetails = new Button("View Movie Details");
+
+        viewMovieDetails.setOnAction(e -> {
+            stage.setScene(createMovieDetailsScene(stage));
+        });
+
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(
+                titleLabel,
+                viewMovieDetails
+        );      
+
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+
+        Scene scene = new Scene(layout, 500, 350);
+        titleLabel.setStyle("-fx-font-size: 18px;");
+
+        return scene;
+    }
+
+    private Scene createMovieDetailsScene(Stage stage) {
+        Label titleLabel = new Label("Movie Details Screen");
+
+        Label movieTitle = new Label("Title: Interstellar");
+
+        Label movieRating = new Label("Rating: PG-13");
+
+        Label movieRuntime = new Label("Runtime: 169 minutes");
+
+        Button backButton = new Button("Back");
+
+        Button viewShowtimes = new Button("View Showtimes");
+
+        backButton.setOnAction(e -> {
+            stage.setScene(createMainPageScene(stage));
+        });
+
+
+        Label movieDescription = new Label("Description: A team of explorers travel through a wormhole in space.");
+        movieDescription.setWrapText(true);
+
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(
+                titleLabel,
+                movieTitle,
+                movieRating,
+                movieRuntime,
+                backButton,
+                viewShowtimes
+        );
+
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+
+        Scene scene = new Scene(layout, 500, 350);
+        titleLabel.setStyle("-fx-font-size: 18px;");
+
+        return scene;
     }
 
     public static void main(String[] args) {
