@@ -112,7 +112,6 @@ public class App extends Application {
             stage.setScene(createMainPageScene(stage));
         });
 
-
         Label movieDescription = new Label("Description: A team of explorers travel through a wormhole in space.");
         movieDescription.setWrapText(true);
 
@@ -123,7 +122,8 @@ public class App extends Application {
                 movieRating,
                 movieRuntime,
                 backButton,
-                viewShowtimes
+                viewShowtimes,
+                movieDescription
         );
 
         layout.setAlignment(Pos.CENTER);
