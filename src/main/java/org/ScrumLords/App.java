@@ -112,6 +112,10 @@ public class App extends Application {
             stage.setScene(createMainPageScene(stage));
         });
 
+        viewShowtimes.setOnAction(e -> {
+            stage.setScene(createShowtimesScene(stage));
+        });
+
         Label movieDescription = new Label("Description: A team of explorers travel through a wormhole in space.");
         movieDescription.setWrapText(true);
 
@@ -121,9 +125,39 @@ public class App extends Application {
                 movieTitle,
                 movieRating,
                 movieRuntime,
-                backButton,
                 viewShowtimes,
-                movieDescription
+                movieDescription,
+                backButton
+        );
+
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+
+        Scene scene = new Scene(layout, 500, 350);
+        titleLabel.setStyle("-fx-font-size: 18px;");
+
+        return scene;
+    }
+
+    private Scene createShowtimesScene(Stage stage) {
+        Label titleLabel = new Label("Available Showtimes");
+
+        Label movieTitle = new Label("Interstellar");
+
+        Label movieShowtimes = new Label("10:00 AM \n 1:30 PM \n 5:00 PM \n 8:30 PM");
+
+        Button backButton = new Button("Back");
+
+        backButton.setOnAction(e -> {
+            stage.setScene(createMovieDetailsScene(stage));
+        });
+
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(
+                titleLabel,
+                movieTitle,
+                movieShowtimes,
+                backButton
         );
 
         layout.setAlignment(Pos.CENTER);
