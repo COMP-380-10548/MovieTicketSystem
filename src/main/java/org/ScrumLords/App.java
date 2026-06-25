@@ -96,6 +96,8 @@ public class App extends Application {
     }
 
     private Scene createMovieDetailsScene(Stage stage) {
+        boolean hasShowtimes = false; //Temporary test value for no-showtimes case
+
         Label titleLabel = new Label("Movie Details Screen");
 
         Label movieTitle = new Label("Title: Interstellar");
@@ -113,7 +115,13 @@ public class App extends Application {
         });
 
         viewShowtimes.setOnAction(e -> {
-            stage.setScene(createShowtimesScene(stage));
+            if (hasShowtimes == true) {
+                stage.setScene(createShowtimesScene(stage));
+            }
+            else {
+                stage.setScene(createNoShowtimesScene(stage));
+            }
+            
         });
 
         Label movieDescription = new Label("Description: A team of explorers travel through a wormhole in space.");
@@ -145,6 +153,36 @@ public class App extends Application {
         Label movieTitle = new Label("Interstellar");
 
         Label movieShowtimes = new Label("10:00 AM \n 1:30 PM \n 5:00 PM \n 8:30 PM");
+
+        Button backButton = new Button("Back");
+
+        backButton.setOnAction(e -> {
+            stage.setScene(createMovieDetailsScene(stage));
+        });
+
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(
+                titleLabel,
+                movieTitle,
+                movieShowtimes,
+                backButton
+        );
+
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+
+        Scene scene = new Scene(layout, 500, 350);
+        titleLabel.setStyle("-fx-font-size: 18px;");
+
+        return scene;
+    }
+
+    private Scene createNoShowtimesScene(Stage stage) {
+        Label titleLabel = new Label("Available Showtimes");
+
+        Label movieTitle = new Label("Interstellar");
+
+        Label movieShowtimes = new Label("No showtimes are currently available.");
 
         Button backButton = new Button("Back");
 
