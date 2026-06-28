@@ -25,9 +25,12 @@ public class LoginController {
         System.out.println("LOGIN!\nusername: " + username + "\npassword: " + password); 
         statusLabel.setText("omg something happened...");
 
-        // example, TODO
+        // TODO: add actual login validation
         if (username.equals("admin") && password.equals("admin")) {
-            SceneManager.switchToScene("MovieGallery.fxml", null);
+            // this should switch to the homepage but I dont want to reimplement the movie details stuff yet
+            SceneManager.switchToScene("MovieGallery.fxml", (MovieGalleryController controller) -> {
+                controller.setUsername(username);
+            });
         }
     }
 }
