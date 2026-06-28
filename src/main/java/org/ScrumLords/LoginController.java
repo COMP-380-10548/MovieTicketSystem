@@ -18,7 +18,16 @@ public class LoginController {
     private Label statusLabel;
 
     public void submitLogin(ActionEvent e) {
-        System.out.println("LOGIN!\nusername: " + usernameField.getText() + "\npassword: " + passwordField.getText());
+        
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        
+        System.out.println("LOGIN!\nusername: " + username + "\npassword: " + password); 
         statusLabel.setText("omg something happened...");
+
+        // example, TODO
+        if (username.equals("admin") && password.equals("admin")) {
+            SceneManager.switchToScene("MovieGallery.fxml", null);
+        }
     }
 }
