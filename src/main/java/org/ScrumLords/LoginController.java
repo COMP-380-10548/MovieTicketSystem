@@ -32,11 +32,10 @@ public class LoginController {
         statusLabel.setText("Status: validating login...");
         PauseTransition pause = new PauseTransition(Duration.seconds(1));
 
-        // Kind of pointless but added cus whynot
+        // Kind of pointless login delay but added cus whynot
         pause.setOnFinished(event -> {
             // TODO: add actual login validation
             if (username.equals("admin") && password.equals("admin")) {
-                // this should switch to the homepage but I dont want to reimplement the movie details stuff yet
                 SceneManager.switchToScene("MainPage.fxml", (MainPageController controller) -> {
                     controller.setUsername(username);
                 });

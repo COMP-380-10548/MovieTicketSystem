@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 
 public class MovieShowtimesController {
 
-    // example of array of showtimes to display for a movie. can be reworked
+    // example of array of showtimes to display for a movie. can be reworked.
     private LocalDate[] movieTimes;
 
     @FXML
