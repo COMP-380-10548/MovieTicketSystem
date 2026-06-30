@@ -21,9 +21,15 @@ public class MovieDetailsController {
     //Temp placeholder data until we implement a database to pull from
     @FXML
     public void initialize() {
-        movieTitleLabel.setText("Title: Interstellar");
-        movieRatingLabel.setText("Rating: PG-13");
-        movieRuntimeLabel.setText("Runtime: 2h 49m");
-        movieDetailsLabel.setText("Description: A team of explorers travels through a wormhole in space.");
+        Movie movie = new Movie("Interstellar",
+            "PG-13",
+            "2h 49m",
+            "A team of explorers travels through a wormhole in space."
+        );
+
+        movieTitleLabel.setText("Title: " + movie.getTitle());
+        movieRatingLabel.setText("Rating: " + movie.getRating());
+        movieRuntimeLabel.setText("Runtime: " + movie.getRuntime());
+        movieDetailsLabel.setText("Description: " + movie.getDescription());
     }
 }
