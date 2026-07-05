@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" spacing="10.0" xmlns="http://javafx.com/javafx/21.0.3-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ScrumLords.MovieDetailsController">
+   <children>
+      <Label style="-fx-font-size: 18px;" text="Movie Details Screen" />
+      <Label fx:id="movieTitleLabel" text="Title: &lt;NULL&gt;" />
+      <Label fx:id="movieRatingLabel" text="Rating: &lt;NULL&gt;" />
+      <Label fx:id="movieRuntimeLabel" text="Runtime: &lt;NULL&gt;" />
+      <Button mnemonicParsing="false" onAction="#viewShowtimes" text="View Showtimes" />
+      <Label fx:id="movieDetailsLabel" text="Description: &lt;NULL&gt;" wrapText="true" />
+      <Button mnemonicParsing="false" onAction="#returnToParent" text="Back" />
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>
