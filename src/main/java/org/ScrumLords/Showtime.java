@@ -1,4 +1,5 @@
 package org.ScrumLords;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 
