@@ -40,13 +40,6 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
-               <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#viewMovieDetails" text="View Movie Details" />
-                     </children>
-                  </VBox>
-               </children>
             </GridPane>
          </content>
       </ScrollPane>
