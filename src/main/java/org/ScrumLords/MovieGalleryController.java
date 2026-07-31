@@ -3,14 +3,23 @@ package org.ScrumLords;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.event.ActionEvent;
-import javafx.scene.layout.RowConstraints;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 public class MovieGalleryController {
 
     @FXML
     private Button returnButton;
+
+    @FXML
+    private TextField searchField;
+
+    @FXML
+    private void handleSearch(ActionEvent event) {
+        String searchText = searchField.getText();
+        System.out.println("Searching for: " + searchText);
+    }
 
     @FXML
     public void initialize() {

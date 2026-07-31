@@ -8,10 +8,24 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" spacing="10.0" xmlns="http://javafx.com/javafx/21.0.3-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ScrumLords.MovieGalleryController">
    <children>
       <Label style="-fx-font-size: 18px;" text="Movie Gallery" />
+      <HBox alignment="CENTER" spacing="10.0">
+         <children>
+            <TextField fx:id="searchField"
+                     promptText="Search movies..."
+                     HBox.hgrow="ALWAYS" />
+
+            <Button mnemonicParsing="false"
+                  onAction="#handleSearch"
+                  text="Search" />
+         </children>
+      </HBox>
       <ScrollPane fitToWidth="true" prefHeight="800.0" prefWidth="200.0">
          <content>
             <GridPane fx:id="movieGallery" gridLinesVisible="true" prefHeight="1600.0" prefWidth="800.0">
@@ -36,7 +50,10 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <Button mnemonicParsing="false" onAction="#returnToMainPage" text="Return" />
+      <Button fx:id="returnButton"
+        mnemonicParsing="false"
+        onAction="#returnToMainPage"
+        text="Return" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
