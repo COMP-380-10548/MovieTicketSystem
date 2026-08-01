@@ -33,10 +33,12 @@ public class MovieDetailsController {
     @FXML
     public void initialize() {
         movie = new Movie(
+            "1a",
             "Interstellar",
             "PG-13",
-            "2h 49m",
-            "A team of explorers travels through a wormhole in space."
+            169,
+            null,
+            "..."
         );
 
         showtimes = List.of(
