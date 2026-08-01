@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.geometry.Pos;
+import javafx.geometry.HPos;
 
 public class MovieGalleryController {
 
@@ -43,7 +44,15 @@ public class MovieGalleryController {
                 filteredMovies.add(movie);
         }
 
-        displayMovies(filteredMovies);
+        if (filteredMovies.isEmpty()) {
+            movieGallery.getChildren().clear();
+            Label noResultsLabel = new Label("No movies match your search.");
+            movieGallery.add(noResultsLabel, 0, 0, 3, 1);
+            GridPane.setHalignment(noResultsLabel, HPos.CENTER);
+        }
+        else {
+            displayMovies(filteredMovies);
+        }  
     }
 
     @FXML
