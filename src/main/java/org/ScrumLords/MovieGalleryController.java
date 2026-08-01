@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import javafx.geometry.Pos;
+
 public class MovieGalleryController {
 
     private List<Movie> movies;
@@ -30,34 +32,50 @@ public class MovieGalleryController {
 
     @FXML
     private void handleSearch(ActionEvent event) {
-        String searchText = searchField.getText();
+        String searchText = searchField.getText().toLowerCase();
+        List<Movie> filteredMovies = new ArrayList<>();
         System.out.println("Searching for: " + searchText);
+
+        for (Movie movie : movies) {
+            if (movie.getTitle().toLowerCase().contains(searchText)) 
+                filteredMovies.add(movie);
+            else if (movie.getDescription().toLowerCase().contains(searchText))
+                filteredMovies.add(movie);
+        }
+
+        displayMovies(filteredMovies);
     }
 
     @FXML
     public void initialize() {
         movies = new ArrayList<>();
-        movies.add(new Movie("1a", "Interstellar", "PG13", 169, null, "space exploration"));
-        movies.add(new Movie("2a", "Dune", "PG-13", 155, null, "Science fiction adventure"));
-        movies.add(new Movie("3a", "Minecraft", "PG", 101, null, "Fantasy adventure"));
-        movies.add(new Movie("4a", "Batman", "PG-13", 176, null, "Superhero crime drama"));
+        movies.add(new Movie("1a", "Interstellar", "PG13", 169, null, "space exploration","/org/ScrumLords/images/interstellar.jpg"));
+        movies.add(new Movie("2a", "Dune", "PG-13", 155, null, "Science fiction adventure","/org/ScrumLords/images/dune.jpg"));
+        movies.add(new Movie("3a", "Minecraft", "PG", 101, null, "Fantasy adventure","/org/ScrumLords/images/minecraft.jpg"));
+        movies.add(new Movie("4a", "Batman", "PG-13", 176, null, "Superhero crime drama","/org/ScrumLords/images/batman.jpg"));
 
         Platform.runLater(() -> returnButton.requestFocus());
 
-        displayMovies();
+        displayMovies(movies);
     }
 
-    private void displayMovies() {
+    private void displayMovies(List<Movie> moviesToDisplay) {
         int index = 0;
 
-        for (Movie movie : movies) {
+        movieGallery.getChildren().clear();
+
+        for (Movie movie : moviesToDisplay) {
             int column = index % 3;
             int row = index / 3;
 
             VBox movieContainer = new VBox();
+            movieContainer.setPrefWidth(240);
+            movieContainer.setPrefHeight(300);
+            movieContainer.setSpacing(8);
+            movieContainer.setAlignment(Pos.CENTER);
             
             ImageView movieImage = new ImageView();
-            Image poster = new Image(getClass().getResource("/org/ScrumLords/images/moviePoster.jpg").toExternalForm());
+            Image poster = new Image(getClass().getResource(movie.getPosterPath()).toExternalForm());
             movieImage.setImage(poster);
             movieImage.setFitWidth(240);
             movieImage.setPreserveRatio(true);
@@ -69,6 +87,13 @@ public class MovieGalleryController {
             movieGallery.add(movieContainer, column, row);
 
             index += 1;
+
+            movieContainer.setOnMouseClicked(event -> {
+                SceneManager.<MovieDetailsController>switchToScene("MovieDetails.fxml", 
+                controller -> {
+                    controller.setMovie(movie);
+                });
+            });
         }
     }
 

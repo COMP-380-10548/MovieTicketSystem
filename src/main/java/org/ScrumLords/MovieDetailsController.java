@@ -15,7 +15,6 @@ public class MovieDetailsController {
     private Movie movie;
     private List<Showtime> showtimes;
 
-    // TODO: Probably need to implement scene memory/cache
     // to properly return to arbitrary previous page with data intact
     public void returnToParent(ActionEvent e) {
         SceneManager.switchToScene("MovieGallery.fxml", null);
@@ -30,17 +29,17 @@ public class MovieDetailsController {
         );
     }
 
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+
+        movieTitleLabel.setText("Title: " + movie.getTitle());
+        movieRatingLabel.setText("Rating: " + movie.getRating());
+        movieRuntimeLabel.setText("Runtime: " + movie.getRuntime());
+        movieDetailsLabel.setText("Description: " + movie.getDescription());
+    }
+
     @FXML
     public void initialize() {
-        movie = new Movie(
-            "1a",
-            "Interstellar",
-            "PG-13",
-            169,
-            null,
-            "..."
-        );
-
         showtimes = List.of(
             new Showtime(
                 1,
@@ -49,10 +48,5 @@ public class MovieDetailsController {
                 LocalDateTime.of(2026, 7, 29, 21, 19)
             )
         );
-
-        movieTitleLabel.setText("Title: " + movie.getTitle());
-        movieRatingLabel.setText("Rating: " + movie.getRating());
-        movieRuntimeLabel.setText("Runtime: " + movie.getRuntime());
-        movieDetailsLabel.setText("Description: " + movie.getDescription());
     }
 }

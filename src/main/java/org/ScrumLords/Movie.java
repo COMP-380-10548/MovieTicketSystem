@@ -9,14 +9,16 @@ public class Movie {
     private int runtime;
     private List<String> genres;
     private String description;
+    private String posterPath;
 
-    public Movie(String movieId, String title, String rating, int runtime, List<String> genres, String description) {
+    public Movie(String movieId, String title, String rating, int runtime, List<String> genres, String description, String posterPath) {
         this.movieId = movieId;
         this.title = title;
         this.rating = rating;
         this.runtime = runtime;
         this.description = description;
         this.genres = genres;
+        this.posterPath = posterPath;
     }
 
     public String getMovieId() {
@@ -41,5 +43,9 @@ public class Movie {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getPosterPath() {
+        return posterPath;
     }
 }
