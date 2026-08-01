@@ -1,16 +1,28 @@
 package org.ScrumLords;
 
+import java.util.List;
+
 public class Movie {
+    private String movieId;
     private String title;
     private String rating;
-    private String runtime;
+    private int runtime;
+    private List<String> genres;
     private String description;
+    private String posterPath;
 
-    public Movie(String title, String rating, String runtime, String description) {
+    public Movie(String movieId, String title, String rating, int runtime, List<String> genres, String description, String posterPath) {
+        this.movieId = movieId;
         this.title = title;
         this.rating = rating;
         this.runtime = runtime;
         this.description = description;
+        this.genres = genres;
+        this.posterPath = posterPath;
+    }
+
+    public String getMovieId() {
+        return movieId;
     }
 
     public String getTitle() {
@@ -21,13 +33,19 @@ public class Movie {
         return rating;
     }
 
-    public String getRuntime() {
+    public int getRuntime() {
         return runtime;
+    }
+
+    public List<String> getGenres() {
+        return genres;
     }
 
     public String getDescription() {
         return description;
     }
+
+    public String getPosterPath() {
+        return posterPath;
+    }
 }
-
-
