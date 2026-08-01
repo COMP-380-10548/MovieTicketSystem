@@ -12,6 +12,9 @@ import javafx.scene.control.TextField;
 import java.util.List;
 import java.util.ArrayList;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class MovieGalleryController {
 
     private List<Movie> movies;
@@ -52,7 +55,16 @@ public class MovieGalleryController {
             int row = index / 3;
 
             VBox movieContainer = new VBox();
+            
+            ImageView movieImage = new ImageView();
+            Image poster = new Image(getClass().getResource("/org/ScrumLords/images/moviePoster.jpg").toExternalForm());
+            movieImage.setImage(poster);
+            movieImage.setFitWidth(240);
+            movieImage.setPreserveRatio(true);
+
             Label movieTitleLabel = new Label(movie.getTitle());
+
+            movieContainer.getChildren().add(movieImage);
             movieContainer.getChildren().add(movieTitleLabel);
             movieGallery.add(movieContainer, column, row);
 
