@@ -10,8 +10,9 @@ public class Movie {
     private List<String> genres;
     private String description;
     private String posterPath;
+    private List<Showtime> showtimes;
 
-    public Movie(String movieId, String title, String rating, int runtime, List<String> genres, String description, String posterPath) {
+    public Movie(String movieId, String title, String rating, int runtime, List<String> genres, String description, String posterPath, List<Showtime> showtimes) {
         this.movieId = movieId;
         this.title = title;
         this.rating = rating;
@@ -19,6 +20,7 @@ public class Movie {
         this.description = description;
         this.genres = genres;
         this.posterPath = posterPath;
+        this.showtimes = showtimes;
     }
 
     public String getMovieId() {
@@ -47,5 +49,9 @@ public class Movie {
 
     public String getPosterPath() {
         return posterPath;
+    }
+
+    public List<Showtime> getShowtimes() {
+        return showtimes;
     }
 }

@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.util.List;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import javafx.scene.image.Image;
@@ -58,10 +59,77 @@ public class MovieGalleryController {
     @FXML
     public void initialize() {
         movies = new ArrayList<>();
-        movies.add(new Movie("1a", "Interstellar", "PG13", 169, null, "space exploration","/org/ScrumLords/images/interstellar.jpg"));
-        movies.add(new Movie("2a", "Dune", "PG-13", 155, null, "Science fiction adventure","/org/ScrumLords/images/dune.jpg"));
-        movies.add(new Movie("3a", "Minecraft", "PG", 101, null, "Fantasy adventure","/org/ScrumLords/images/minecraft.jpg"));
-        movies.add(new Movie("4a", "Batman", "PG-13", 176, null, "Superhero crime drama","/org/ScrumLords/images/batman.jpg"));
+
+        List<Showtime> interstellarShowtimes = List.of(
+            new Showtime(
+                1,       // showtime ID
+                1,          // movie ID (Interstellar)
+                LocalDateTime.of(2026, 8, 2, 18, 30),  // 6:30 PM
+                LocalDateTime.of(2026, 8, 2, 21, 19)   // End time
+            ),
+            new Showtime(
+                2,
+                1,
+                LocalDateTime.of(2026, 8, 2, 22, 15),  // 10:15 PM
+                LocalDateTime.of(2026, 8, 3, 1, 4)     // Ends after midnight
+            )
+        );
+
+        List<Showtime> duneShowtimes = List.of(
+            new Showtime(
+                3,
+                2,
+                LocalDateTime.of(2026, 8, 2, 13, 0),
+                LocalDateTime.of(2026, 8, 2, 15, 35)
+            ),
+            new Showtime(
+                4,
+                2,
+                LocalDateTime.of(2026, 8, 2, 16, 45),
+                LocalDateTime.of(2026, 8, 2, 19, 20)
+            ),
+            new Showtime(
+                5,
+                2,
+                LocalDateTime.of(2026, 8, 2, 20, 30),
+                LocalDateTime.of(2026, 8, 2, 23, 5)
+            )
+        );
+
+        List<Showtime> minecraftShowtimes = List.of(
+            new Showtime(
+                6,
+                3,
+                LocalDateTime.of(2026, 8, 2, 12, 0),
+                LocalDateTime.of(2026, 8, 2, 13, 41)
+            ),
+            new Showtime(
+                7,
+                3,
+                LocalDateTime.of(2026, 8, 2, 14, 30),
+                LocalDateTime.of(2026, 8, 2, 16, 11)
+            )
+        );
+
+        List<Showtime> batmanShowtimes = List.of(
+            new Showtime(
+                8,
+                4,
+                LocalDateTime.of(2026, 8, 2, 19, 0),
+                LocalDateTime.of(2026, 8, 2, 21, 56)
+            ),
+            new Showtime(
+                9,
+                4,
+                LocalDateTime.of(2026, 8, 2, 21, 45),
+                LocalDateTime.of(2026, 8, 3, 0, 41)
+            )
+        );
+
+        movies.add(new Movie("1a", "Interstellar", "PG13", 169, null, "space exploration","/org/ScrumLords/images/interstellar.jpg", interstellarShowtimes));
+        movies.add(new Movie("2a", "Dune", "PG-13", 155, null, "Science fiction adventure","/org/ScrumLords/images/dune.jpg", duneShowtimes));
+        movies.add(new Movie("3a", "Minecraft", "PG", 101, null, "Fantasy adventure","/org/ScrumLords/images/minecraft.jpg", minecraftShowtimes));
+        movies.add(new Movie("4a", "Batman", "PG-13", 176, null, "Superhero crime drama","/org/ScrumLords/images/batman.jpg", batmanShowtimes));
 
         Platform.runLater(() -> returnButton.requestFocus());
 
