@@ -24,7 +24,7 @@ public class MovieDetailsController {
         SceneManager.<MovieShowtimesController>switchToScene(
             "MovieShowtimes.fxml",
             controller -> {
-                controller.setMovieShowtimes(movie, showtimes);
+                controller.setMovieShowtimes(movie, movie.getShowtimes());
             }
         );
     }
@@ -40,13 +40,5 @@ public class MovieDetailsController {
 
     @FXML
     public void initialize() {
-        showtimes = List.of(
-            new Showtime(
-                1,
-                1,
-                LocalDateTime.of(2026, 7, 29, 18, 30),
-                LocalDateTime.of(2026, 7, 29, 21, 19)
-            )
-        );
     }
 }
