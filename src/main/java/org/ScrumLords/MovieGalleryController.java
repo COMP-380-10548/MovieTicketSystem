@@ -23,6 +23,8 @@ public class MovieGalleryController {
 
     private List<Movie> movies;
 
+    private String username;
+
     @FXML
     private Button returnButton;
 
@@ -180,6 +182,14 @@ public class MovieGalleryController {
     }
 
     public void returnToMainPage(ActionEvent e) {
-        SceneManager.switchToScene("MainPage.fxml", null);
+        SceneManager.<MainPageController>switchToScene(
+        "MainPage.fxml", 
+        controller -> {
+            controller.setUsername(username);
+        });
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
