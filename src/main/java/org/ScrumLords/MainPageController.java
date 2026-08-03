@@ -7,13 +7,28 @@ import javafx.scene.control.Label;
 public class MainPageController {
 
     @FXML 
-    Label usernameLabel;
+    private Label usernameLabel;
+
+    private String username;
 
     public void setUsername(String username) {
+        this.username = username;
         usernameLabel.setText("User: " + username);
     }
 
+    @FXML
     public void viewMovieGallery(ActionEvent e) {
-        SceneManager.switchToScene("MovieGallery.fxml", null);
+        SceneManager.<MovieGalleryController>switchToScene(
+            "MovieGallery.fxml",
+             controller -> controller.setUsername(username)
+            );
+        }
+
+    @FXML
+    public void handleAccount(ActionEvent event) {
+        SceneManager.<AccountController>switchToScene(
+            "Account.fxml",
+            controller -> controller.setUsername(username)
+        );
     }
 }
