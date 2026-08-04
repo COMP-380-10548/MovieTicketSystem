@@ -42,7 +42,7 @@ public class AccountController {
     @FXML
     public void handleBack(ActionEvent event) {
         SceneManager.<MainPageController>switchToScene(
-            "MainPage.fxml", 
+            "/org/ScrumLords/view/MainPage.fxml", 
             controller -> controller.setUsername(username)
         );
     }
