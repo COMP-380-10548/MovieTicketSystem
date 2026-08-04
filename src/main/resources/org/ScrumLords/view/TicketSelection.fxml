@@ -13,7 +13,7 @@
             prefWidth="800.0"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.ScrumLords.TicketSelectionController">
+            fx:controller="org.ScrumLords.controller.TicketSelectionController"
 
     <top>
         <VBox alignment="CENTER" spacing="8.0">
