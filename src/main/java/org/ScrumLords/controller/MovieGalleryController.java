@@ -1,4 +1,4 @@
-package org.ScrumLords;
+package org.ScrumLords.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
@@ -10,6 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.util.List;
+
+import org.ScrumLords.SceneManager;
+import org.ScrumLords.model.Movie;
+import org.ScrumLords.model.Showtime;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -168,7 +173,7 @@ public class MovieGalleryController {
             index += 1;
 
             movieContainer.setOnMouseClicked(event -> {
-                SceneManager.<MovieDetailsController>switchToScene("MovieDetails.fxml", 
+                SceneManager.<MovieDetailsController>switchToScene("/org/ScrumLords/view/MovieDetails.fxml", 
                 controller -> {
                     controller.setMovie(movie);
                 });

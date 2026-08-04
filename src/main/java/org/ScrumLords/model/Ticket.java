@@ -1,4 +1,4 @@
-package org.ScrumLords;
+package org.ScrumLords.model;
 
 public class Ticket {
     private int ticketId;

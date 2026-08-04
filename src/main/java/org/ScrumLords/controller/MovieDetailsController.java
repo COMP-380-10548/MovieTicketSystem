@@ -1,7 +1,11 @@
-package org.ScrumLords;
+package org.ScrumLords.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import org.ScrumLords.SceneManager;
+import org.ScrumLords.model.Movie;
+import org.ScrumLords.model.Showtime;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,12 +21,12 @@ public class MovieDetailsController {
 
     // to properly return to arbitrary previous page with data intact
     public void returnToParent(ActionEvent e) {
-        SceneManager.switchToScene("MovieGallery.fxml", null);
+        SceneManager.switchToScene("/org/ScrumLords/view/MovieGallery.fxml", null);
     }
 
     public void viewShowtimes(ActionEvent e) {
         SceneManager.<MovieShowtimesController>switchToScene(
-            "MovieShowtimes.fxml",
+            "/org/ScrumLords/view/MovieShowtimes.fxml",
             controller -> {
                 controller.setMovieShowtimes(movie, movie.getShowtimes());
             }
