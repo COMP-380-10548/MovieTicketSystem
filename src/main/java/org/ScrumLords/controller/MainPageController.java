@@ -1,4 +1,6 @@
-package org.ScrumLords;
+package org.ScrumLords.controller;
+
+import org.ScrumLords.SceneManager;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +21,7 @@ public class MainPageController {
     @FXML
     public void viewMovieGallery(ActionEvent e) {
         SceneManager.<MovieGalleryController>switchToScene(
-            "MovieGallery.fxml",
+            "/org/ScrumLords/view/MovieGallery.fxml",
              controller -> controller.setUsername(username)
             );
         }
@@ -27,7 +29,7 @@ public class MainPageController {
     @FXML
     public void handleAccount(ActionEvent event) {
         SceneManager.<AccountController>switchToScene(
-            "Account.fxml",
+            "/org/ScrumLords/view/Account.fxml",
             controller -> controller.setUsername(username)
         );
     }
