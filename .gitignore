@@ -28,3 +28,6 @@ replay_pid*
 
 # maven
 target
+
+# env secrets
+.env

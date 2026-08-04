@@ -1,4 +1,6 @@
-package org.ScrumLords;
+package org.ScrumLords.controller;
+
+import org.ScrumLords.SceneManager;
 
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -36,7 +38,7 @@ public class LoginController {
         pause.setOnFinished(event -> {
             // TODO: add actual login validation
             if (username.equals("admin") && password.equals("admin")) {
-                SceneManager.switchToScene("MainPage.fxml", (MainPageController controller) -> {
+                SceneManager.switchToScene("/org/ScrumLords/view/MainPage.fxml", (MainPageController controller) -> {
                     controller.setUsername(username);
                 });
             } else {

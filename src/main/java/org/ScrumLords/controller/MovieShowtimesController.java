@@ -1,6 +1,10 @@
-package org.ScrumLords;
+package org.ScrumLords.controller;
 
 import java.util.List;
+
+import org.ScrumLords.SceneManager;
+import org.ScrumLords.model.Movie;
+import org.ScrumLords.model.Showtime;
 
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
@@ -45,7 +49,7 @@ public class MovieShowtimesController {
 
     public void returnToParent(ActionEvent event) {
         SceneManager.<MovieDetailsController>switchToScene(
-            "MovieDetails.fxml",
+            "/org/ScrumLords/view/MovieDetails.fxml",
             controller -> controller.setMovie(movie)
         );
     }

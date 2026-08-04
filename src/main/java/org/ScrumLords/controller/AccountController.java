@@ -1,4 +1,6 @@
-package org.ScrumLords;
+package org.ScrumLords.controller;
+
+import org.ScrumLords.SceneManager;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +18,7 @@ public class AccountController {
 
     @FXML
     public void handleLogout(ActionEvent event) {
-        SceneManager.switchToScene("Login.fxml",null);
+        SceneManager.switchToScene("/org/ScrumLords/view/Login.fxml",null);
     }
 
     @FXML
