@@ -183,7 +183,7 @@ public class MovieGalleryController {
 
     // TODO: use setUserData to associate each movie item with a specific movie
     public void viewMovieDetails(ActionEvent e) {
-       SceneManager.switchToScene("MovieDetails.fxml", null); 
+       SceneManager.switchToScene("/org/ScrumLords/view/MovieDetails.fxml", null); 
     }
 
     public void returnToMainPage(ActionEvent e) {

@@ -18,7 +18,7 @@ public class DatabaseService {
         String uri = dotenv.get("MONGODB_URI");
 
         this.client = MongoClients.create(uri);
-        this.database = client.getDatabase("MovieTicketSystem");
+        this.database = client.getDatabase("MovieTicketDatabase");
     }
 
     /**

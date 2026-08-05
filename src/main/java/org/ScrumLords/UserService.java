@@ -19,17 +19,34 @@ public class UserService {
         this.users = DatabaseService.getInstance().getCollection("users"); 
     }
 
+    /**
+     * Authenticate a user against the DatabaseService singleton
+     * @param username A String of the username to authenticate against
+     * @param password A string of the password to authenticate against
+     * @return Returns a registered user with the user's queried information. Can return null if the user doesn't exist or the password doesn't match.
+     */
     public User authenticate(String username, String password) {
         Document doc = users.find(eq("username", username)).first();
 
-        if(doc == null)
+        if(doc == null) {
+            System.out.println("Document doesn't exist! D:");
             return null;
+        }
         if(!doc.getString("password").equals(password))
             return null;
 
         return toUser(doc);
     }
     
+    /**
+     * Registeres a new user against the DatabaseService singleton
+     * @param username A string that defines the user's username. Is checked against the database to be unique.
+     * @param firstName A string that defines the user's first name.
+     * @param lastName A string that defines the user's last name.
+     * @param email A string that defines the user's email.
+     * @param password A string that defines the user's password.
+     * @return A boolean representing whether or not the user was created successfully.
+     */
     public boolean register(String username, String firstName, String lastName, String email, String password) {
         if(users.find(eq("username", username)).first() != null)
             return false;
