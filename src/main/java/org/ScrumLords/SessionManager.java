@@ -12,7 +12,7 @@ public class SessionManager {
 
     /**
      * Store instantiated user into session
-     * @param user The instantiaed user to add into the session
+     * @param user An instantiaed user to add into the session
      */
     public static void store(User user) {
         currentUser = user;

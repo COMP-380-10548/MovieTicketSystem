@@ -38,15 +38,15 @@ public class DatabaseService {
 
     /**
      * Request a specific collection with a set of documents from the database based on its name
-     * @param name The name of the desired collection to obtain
-     * @return The MongoCollection object and its associated arbitrary documents 
+     * @param name String of the desired collection to obtain
+     * @return A MongoCollection object and its associated arbitrary documents 
      */
     public MongoCollection<Document> getCollection(String name) {
         return database.getCollection(name);
     }
 
     /**
-     * Close the connection to DatabaseService singleton and its associated MongoClient
+     * Close the connection to the MongoClient within the DatabaseService singleton
      */
     public void close() {
         client.close();

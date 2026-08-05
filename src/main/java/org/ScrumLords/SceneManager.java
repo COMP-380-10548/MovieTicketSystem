@@ -22,8 +22,8 @@ public final class SceneManager {
     private SceneManager() {}
 
     /**
-     * Initiate the primary stage
-     * @param stage The primary stage to handle scenes within
+     * Initiate a primary stage for scene management
+     * @param stage A stage to manage
      */
     public static void init(Stage stage) {
         currStage = stage;
@@ -32,7 +32,7 @@ public final class SceneManager {
     /**
      * Change the currently displayed scene within the frontend's stage.
      * @param <T> The class of the scene to switch into when a consumer is provided.
-     * @param scenePath The name of the scene within /org/ScrumLords/view to switch to. The ".fxml" extension is not needed.
+     * @param scenePath A String of the scene name from /org/ScrumLords/view to switch to. The ".fxml" extension is not needed.
      * @param controllerConsumer An optional lambda function that can access data within the next scene's controller. Useful for passing data directly between controllers.
      */
     public static <T> void switchToScene(String scenePath, Consumer<T> controllerConsumer) {
