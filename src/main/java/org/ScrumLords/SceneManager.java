@@ -25,6 +25,7 @@ public class SceneManager {
     }
 
     public static void goBack() {
+
         if(history.isEmpty())
             return;
         
@@ -36,6 +37,7 @@ public class SceneManager {
     }
 
     private static <T> void loadScene(String scenePath, Consumer<T> controllerConsumer) {
+
         try {
             FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource("/org/ScrumLords/view/" + scenePath + ".fxml"));
             Parent root = loader.load();

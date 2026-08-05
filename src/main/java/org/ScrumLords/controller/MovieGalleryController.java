@@ -171,7 +171,7 @@ public class MovieGalleryController {
             index += 1;
 
             movieContainer.setOnMouseClicked(event -> {
-                SceneManager.<MovieDetailsController>switchToScene("/org/ScrumLords/view/MovieDetails.fxml", 
+                SceneManager.<MovieDetailsController>switchToScene("MovieDetails", 
                 controller -> {
                     controller.setMovie(movie);
                 });
@@ -180,9 +180,6 @@ public class MovieGalleryController {
     }
 
     // TODO: use setUserData to associate each movie item with a specific movie
-    /*public void viewMovieDetails(ActionEvent e) {
-       SceneManager.switchToScene("/org/ScrumLords/view/MovieDetails.fxml", null); 
-    }*/
 
     public void goBack(ActionEvent e) {
         SceneManager.goBack();

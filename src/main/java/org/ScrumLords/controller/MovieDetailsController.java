@@ -20,13 +20,13 @@ public class MovieDetailsController {
     private List<Showtime> showtimes;
 
     // to properly return to arbitrary previous page with data intact
-    public void returnToParent(ActionEvent e) {
-        SceneManager.switchToScene("/org/ScrumLords/view/MovieGallery.fxml", null);
+    public void goBack(ActionEvent e) {
+        SceneManager.goBack();
     }
 
     public void viewShowtimes(ActionEvent e) {
         SceneManager.<MovieShowtimesController>switchToScene(
-            "/org/ScrumLords/view/MovieShowtimes.fxml",
+            "MovieShowtimes",
             controller -> {
                 controller.setMovieShowtimes(movie, movie.getShowtimes());
             }

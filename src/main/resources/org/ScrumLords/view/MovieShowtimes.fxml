@@ -5,12 +5,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" spacing="10.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ScrumLords.controller.MovieShowtimesController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" spacing="10.0" xmlns="http://javafx.com/javafx/21.0.3-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ScrumLords.controller.MovieShowtimesController">
    <children>
       <Label style="-fx-font-size: 18px;" text="Available Showtimes" />
       <Label fx:id="movieTitle" text="&lt;NULL&gt;" />
       <VBox fx:id="showtimeContainer" alignment="CENTER" prefHeight="91.0" prefWidth="460.0" spacing="15.0" />
-      <Button mnemonicParsing="false" onAction="#returnToParent" text="Back">
+      <Button mnemonicParsing="false" onAction="#goBack" text="Back">
          <VBox.margin>
             <Insets top="30.0" />
          </VBox.margin></Button>

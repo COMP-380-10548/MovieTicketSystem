@@ -12,8 +12,6 @@ import javafx.scene.control.Label;
 
 public class MainPageController {
     
-    private String username;
-
     @FXML 
     private Label usernameLabel;
 
@@ -40,11 +38,6 @@ public class MainPageController {
             usernameLabel.setText("Guest");
         }
     }
-
-    /*public void setUsername(String username) {
-        this.username = username;
-        usernameLabel.setText("User: " + username);
-    }*/
 
     @FXML
     public void viewMovieGallery(ActionEvent e) {
