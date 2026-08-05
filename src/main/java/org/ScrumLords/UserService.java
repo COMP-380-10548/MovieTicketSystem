@@ -12,6 +12,10 @@ import static com.mongodb.client.model.Filters.eq;
 
 import java.util.List;
 
+/**
+ * Handles user authentication and registration against the users collection via the DatabaseService.
+ * Maps retrieved MongoDB documents to a subclass of the User template for user instantiation.
+ */
 public class UserService {
     private final MongoCollection<Document> users;
 
@@ -21,9 +25,9 @@ public class UserService {
 
     /**
      * Authenticate a user against the DatabaseService singleton
-     * @param username A String of the username to authenticate against
-     * @param password A string of the password to authenticate against
-     * @return Returns a registered user with the user's queried information. Can return null if the user doesn't exist or the password doesn't match.
+     * @param username Username String to authenticate against
+     * @param password Password String to authenticate against
+     * @return The User associated with the authentication query. Can return null if the user doesn't exist or if the password doesn't match.
      */
     public User authenticate(String username, String password) {
         Document doc = users.find(eq("username", username)).first();
@@ -39,13 +43,13 @@ public class UserService {
     }
     
     /**
-     * Registeres a new user against the DatabaseService singleton
-     * @param username A string that defines the user's username. Is checked against the database to be unique.
-     * @param firstName A string that defines the user's first name.
-     * @param lastName A string that defines the user's last name.
-     * @param email A string that defines the user's email.
-     * @param password A string that defines the user's password.
-     * @return A boolean representing whether or not the user was created successfully.
+     * Registers a new user against the DatabaseService singleton
+     * @param username String that defines the new user's username. Is checked against the database to be unique.
+     * @param firstName String that defines the new user's first name.
+     * @param lastName String that defines the new user's last name.
+     * @param email String that defines the new user's email.
+     * @param password String that defines the new user's password.
+     * @return Boolean showing if the new user was created successfully.
      */
     public boolean register(String username, String firstName, String lastName, String email, String password) {
         if(users.find(eq("username", username)).first() != null)
