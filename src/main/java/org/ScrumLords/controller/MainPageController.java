@@ -1,36 +1,72 @@
 package org.ScrumLords.controller;
 
 import org.ScrumLords.SceneManager;
+import org.ScrumLords.SessionManager;
+import org.ScrumLords.model.User;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class MainPageController {
+    
+    private String username;
 
     @FXML 
     private Label usernameLabel;
 
-    private String username;
+    @FXML
+    private Button accountButton, loginButton, registerButton;
 
-    public void setUsername(String username) {
+    @FXML
+    public void initialize() {
+        User user = SessionManager.getCurrentUser();
+        boolean loggedIn = user != null;
+
+        accountButton.setVisible(loggedIn);
+        accountButton.setManaged(loggedIn);
+
+        loginButton.setVisible(!loggedIn);
+        loginButton.setManaged(!loggedIn);
+        registerButton.setVisible(!loggedIn);
+        registerButton.setManaged(!loggedIn);
+
+
+        if(loggedIn) {
+            usernameLabel.setText(user.getFirstName() + " " + user.getLastName());
+        } else {
+            usernameLabel.setText("Guest");
+        }
+    }
+
+    /*public void setUsername(String username) {
         this.username = username;
         usernameLabel.setText("User: " + username);
-    }
+    }*/
 
     @FXML
     public void viewMovieGallery(ActionEvent e) {
-        SceneManager.<MovieGalleryController>switchToScene(
-            "/org/ScrumLords/view/MovieGallery.fxml",
-             controller -> controller.setUsername(username)
-            );
-        }
+        SceneManager.switchToScene("MovieGallery", null);
+    }
 
     @FXML
     public void handleAccount(ActionEvent event) {
-        SceneManager.<AccountController>switchToScene(
-            "/org/ScrumLords/view/Account.fxml",
-            controller -> controller.setUsername(username)
-        );
+        SceneManager.switchToScene("Account", null);
+    }
+
+    @FXML
+    public void startLogin(ActionEvent event) {
+        SceneManager.switchToScene("Login", null);
+    }
+
+    @FXML
+    public void startRegister(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Feature Unavailable");
+        alert.setHeaderText(null);
+        alert.setContentText("Account registration is not yet available.");
+        alert.showAndWait();
     }
 }
