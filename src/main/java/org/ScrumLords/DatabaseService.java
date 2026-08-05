@@ -8,6 +8,10 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import io.github.cdimascio.dotenv.Dotenv;
 
+/**
+ * Singleton wrapper around the MongoDB client class.
+ * Provides access to collections within the MovieTicketDatabase.
+ */
 public class DatabaseService {
     private static DatabaseService instance;
     private MongoClient client;

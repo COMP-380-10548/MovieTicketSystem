@@ -12,6 +12,10 @@ import static com.mongodb.client.model.Filters.eq;
 
 import java.util.List;
 
+/**
+ * Handles user authentication and registration against the users collection via the DatabaseService.
+ * Maps retrieved MongoDB documents to a subclass of the User template for user instantiation.
+ */
 public class UserService {
     private final MongoCollection<Document> users;
 
