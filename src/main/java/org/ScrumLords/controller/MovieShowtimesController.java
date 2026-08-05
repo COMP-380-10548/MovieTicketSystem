@@ -8,7 +8,9 @@ import org.ScrumLords.model.Showtime;
 
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 import java.time.format.DateTimeFormatter;
 
@@ -20,31 +22,42 @@ public class MovieShowtimesController {
     private Movie movie;
 
     @FXML
-    private Label movieTitle, movieShowtimes;
+    private Label movieTitle;
+
+    @FXML
+    private VBox showtimeContainer;
 
     @FXML
     private void initialize() {
-        movieShowtimes.setText("No showtimes are currently available.");
+        
     }
 
     private void displayShowtimes() {
+        showtimeContainer.getChildren().clear();
+
         if (showtimes == null || showtimes.isEmpty()) {
-            movieShowtimes.setText("No showtimes are currently available.");
+            showtimeContainer.getChildren().add(
+                new Label("No showtimes are currently available.")
+            );
             return;
         }
-
-        StringBuilder text = new StringBuilder();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
 
         for (Showtime showtime : showtimes) {
-            text.append(showtime.getStartTime().format(formatter))
-                .append(" - ")
-                .append(showtime.getEndTime().format(formatter))
-                .append(System.lineSeparator());
-        }
+            Button showtimeButton = new Button(
+                showtime.getStartTime().format(formatter)
+            );
 
-        movieShowtimes.setText(text.toString());
+            showtimeButton.setOnAction(event -> {
+                SceneManager.<TicketSelectionController>switchToScene(
+                    "/org/ScrumLords/view/TicketSelection.fxml",
+                     controller -> controller.setMovieAndShowtime(movie, showtime)
+                    );
+            });
+
+            showtimeContainer.getChildren().add(showtimeButton);
+        }
     }
 
     public void returnToParent(ActionEvent event) {

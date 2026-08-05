@@ -47,6 +47,6 @@ public class LoginController {
             }
         });
         
-       pause.play(); 
+       pause.play();
     }
 }

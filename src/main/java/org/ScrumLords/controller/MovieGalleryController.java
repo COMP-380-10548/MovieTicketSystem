@@ -188,7 +188,7 @@ public class MovieGalleryController {
 
     public void returnToMainPage(ActionEvent e) {
         SceneManager.<MainPageController>switchToScene(
-        "MainPage.fxml", 
+        "/org/ScrumLords/view/MainPage.fxml", 
         controller -> {
             controller.setUsername(username);
         });
