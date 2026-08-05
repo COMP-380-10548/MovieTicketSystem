@@ -8,42 +8,30 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600.0"
-            prefWidth="800.0"
-            xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.ScrumLords.controller.MainPageController">
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21.0.3-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ScrumLords.controller.MainPageController">
 
     <top>
-        <HBox alignment="CENTER_LEFT"
-              spacing="10.0">
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
 
-            <padding>
-                <Insets top="15.0"
-                        right="20.0"
-                        bottom="15.0"
-                        left="20.0"/>
-            </padding>
+                  <Button fx:id="accountButton" onAction="#handleAccount" text="Account" />
 
-            <Label fx:id="usernameLabel"
-                   text="User: &lt;NULL&gt;"/>
+                  <Label fx:id="usernameLabel" text="&lt;NULL&gt;" />
 
-            <Region HBox.hgrow="ALWAYS"/>
-
-            <Button text="Account"
-                    onAction="#handleAccount"/>
+            <Region HBox.hgrow="ALWAYS" />
+         <Button fx:id="loginButton" mnemonicParsing="false" onAction="#startLogin" text="Login" />
+         <Button fx:id="registerButton" mnemonicParsing="false" onAction="#startRegister" text="Register" />
+         <padding>
+            <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+         </padding>
         </HBox>
     </top>
 
     <center>
-        <VBox alignment="CENTER"
-              spacing="25.0">
+        <VBox alignment="CENTER" spacing="25.0">
 
-            <Label text="Main Page"
-                   style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+            <Label style="-fx-font-size: 22px; -fx-font-weight: bold;" text="Main Page" />
 
-            <Button text="View Movie Gallery"
-                    onAction="#viewMovieGallery"/>
+            <Button onAction="#viewMovieGallery" text="View Movie Gallery" />
         </VBox>
     </center>
 

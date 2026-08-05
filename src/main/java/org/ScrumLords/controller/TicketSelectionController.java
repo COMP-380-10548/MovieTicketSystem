@@ -34,11 +34,8 @@ public class TicketSelectionController {
     }
 
     @FXML
-    public void handleBack(ActionEvent event) {
-        SceneManager.<MovieShowtimesController>switchToScene(
-            "/org/ScrumLords/view/MovieShowtimes.fxml",
-            controller -> controller.setMovieShowtimes(movie, movie.getShowtimes())
-        );
+    public void goBack(ActionEvent event) {
+        SceneManager.goBack();
     }
 
     @FXML

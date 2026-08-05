@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 
 public class LoginController {
 
-    private final UserService userService = new UserService(); 
+    private final UserService userService = new UserService();
     
     @FXML
     private TextField usernameField;
@@ -39,7 +39,7 @@ public class LoginController {
         passwordField.setDisable(true);
         statusLabel.setText("Status: validating login...");
 
-        // Task unit that defines what the thread returns
+        // Task object that defines what the thread returns
         // In this case: a User from the userService
         Task<User> loginTask = new Task<>() {
             @Override
@@ -52,8 +52,8 @@ public class LoginController {
         loginTask.setOnSucceeded(event -> {
            User user = loginTask.getValue();
            if (user != null) {
-            SessionManager.login(user);
-            SceneManager.switchToScene("/org/ScrumLords/view/MainPage.fxml", null);
+            SessionManager.store(user);
+            SceneManager.switchToScene("MainPage", null);
            } else {
             loginButton.setDisable(false);
             usernameField.setDisable(false);
@@ -70,6 +70,11 @@ public class LoginController {
             statusLabel.setText("Status: cannot connect to server");
         });
 
+        // Starts the thread
         new Thread(loginTask).start();
+    }
+
+    public void goBack(ActionEvent e) {
+        SceneManager.goBack();
     }
 }

@@ -51,7 +51,7 @@ public class MovieShowtimesController {
 
             showtimeButton.setOnAction(event -> {
                 SceneManager.<TicketSelectionController>switchToScene(
-                    "/org/ScrumLords/view/TicketSelection.fxml",
+                    "TicketSelection",
                      controller -> controller.setMovieAndShowtime(movie, showtime)
                     );
             });
@@ -60,11 +60,8 @@ public class MovieShowtimesController {
         }
     }
 
-    public void returnToParent(ActionEvent event) {
-        SceneManager.<MovieDetailsController>switchToScene(
-            "/org/ScrumLords/view/MovieDetails.fxml",
-            controller -> controller.setMovie(movie)
-        );
+    public void goBack(ActionEvent event) {
+        SceneManager.goBack();
     }
 
     public void setMovieShowtimes(Movie movie, List<Showtime> showtimes) {

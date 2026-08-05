@@ -7,11 +7,11 @@ public class SessionManager {
 
     private SessionManager() {}
 
-    public static void login(User user) {
+    public static void store(User user) {
         currentUser = user;
     }
 
-    public static void logout() {
+    public static void release() {
         currentUser = null;
     }
 
@@ -19,7 +19,7 @@ public class SessionManager {
         return currentUser;
     }
 
-    public static boolean isLoggedIn() {
+    public static boolean isStored() {
         return currentUser != null;
     }
 }
