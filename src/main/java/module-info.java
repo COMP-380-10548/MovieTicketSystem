@@ -6,6 +6,7 @@ module org.ScrumLords {
     requires org.mongodb.driver.sync.client;
     requires org.mongodb.driver.core;
     requires io.github.cdimascio.dotenv.java;
+    requires org.mongodb.bson;
 
     opens org.ScrumLords to javafx.fxml;
     opens org.ScrumLords.controller to javafx.fxml;

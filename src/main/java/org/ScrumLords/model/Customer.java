@@ -3,8 +3,7 @@ package org.ScrumLords.model;
 import java.util.List;
 
 public class Customer extends User {
-    private String paymentInformation;
-    private List<String> bookingHistory;
+    private List<Booking> bookingHistory;
 
     public Customer(String userId,
                 String username,
@@ -12,20 +11,14 @@ public class Customer extends User {
                 String lastName,
                 String email,
                 String password,
-                String paymentInformation,
-                List<String> bookingHistory) {
+                List<Booking> bookingHistory) {
 
     super(userId, username, firstName, lastName, email, password);
 
-    this.paymentInformation = paymentInformation;
     this.bookingHistory = bookingHistory;
     }
 
-    public String getPaymentInformation() {
-        return paymentInformation;
-    }
-
-    public List<String> getBookingHistory() {
+    public List<Booking> getBookingHistory() {
         return bookingHistory;
     }
 
