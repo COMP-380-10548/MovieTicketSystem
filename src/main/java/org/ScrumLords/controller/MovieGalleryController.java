@@ -24,6 +24,14 @@ import javafx.scene.image.ImageView;
 import javafx.geometry.Pos;
 import javafx.geometry.HPos;
 
+/**
+ * Controls the Movie Gallery view.
+ * Displays available movies, supports title and description searches,
+ * and opens the details page for a selected movie.
+ *
+ * @author A. Garcia
+ * @version 1.0
+ */
 public class MovieGalleryController {
 
     private List<Movie> movies;
@@ -37,6 +45,12 @@ public class MovieGalleryController {
     @FXML
     private GridPane movieGallery;
 
+    /**
+     * Filters the displayed movies using the text entered in the search field.
+     * Movies are matched by title or description.
+     *
+     * @param event the search button event
+     */
     @FXML
     private void handleSearch(ActionEvent event) {
         String searchText = searchField.getText().toLowerCase();
@@ -61,6 +75,10 @@ public class MovieGalleryController {
         }  
     }
 
+    /**
+     * Initializes the movie gallery with sample movie and showtime data,
+     * then displays the available movies.
+     */
     @FXML
     public void initialize() {
         movies = new ArrayList<>();
@@ -141,6 +159,13 @@ public class MovieGalleryController {
         displayMovies(movies);
     }
 
+    /**
+     * Clears and repopulates the gallery with the provided movies.
+     * Each movie is displayed with its poster and title and can be selected
+     * to open the Movie Details view.
+     *
+     * @param moviesToDisplay movies to display in the gallery
+     */
     private void displayMovies(List<Movie> moviesToDisplay) {
         int index = 0;
 
@@ -181,7 +206,16 @@ public class MovieGalleryController {
 
     // TODO: use setUserData to associate each movie item with a specific movie
 
-    public void goBack(ActionEvent e) {
-        SceneManager.goBack();
+    /**
+     * Returns the user to the Main Page.
+     *
+     * @param event the back button event
+     */
+    @FXML
+    public void goBack(ActionEvent event) {
+        SceneManager.switchToScene(
+            "MainPage",
+            null
+        );
     }
 }

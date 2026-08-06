@@ -18,6 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Controls the Ticket Selection view.
+ * Generates the theater seat grid, tracks selected seats,
+ * calculates the ticket total, and manages navigation.
+ *
+ * @author A. Garcia
+ * @version 1.0
+ */
 public class TicketSelectionController {
 
     private Movie movie;
@@ -32,6 +40,9 @@ public class TicketSelectionController {
     @FXML
     private GridPane seatGrid;
 
+    /**
+     * Initializes the Ticket Selection controller.
+     */
     @FXML
     private void initialize() {
 
@@ -39,11 +50,30 @@ public class TicketSelectionController {
 
     private List<Seat> selectedSeats = new ArrayList<>();
 
+    /**
+     * Returns the user to the Movie Showtimes view while preserving
+     * the selected movie and its showtimes.
+     *
+     * @param event the back button event
+     */
     @FXML
     public void goBack(ActionEvent event) {
-        SceneManager.goBack();
+        SceneManager.<MovieShowtimesController>switchToScene(
+            "MovieShowtimes",
+            controller -> controller.setMovieShowtimes(
+                movie,
+                movie.getShowtimes()
+            )
+        );
     }
 
+    /**
+     * Stores the selected movie and showtime, updates the view labels,
+     * and generates the theater seat grid.
+     *
+     * @param movie the selected movie
+     * @param showtime the selected showtime
+     */
     public void setMovieAndShowtime(Movie movie, Showtime showtime) {
         this.movie = movie;
         this.showtime = showtime;
@@ -56,6 +86,10 @@ public class TicketSelectionController {
         generateSeatGrid();
     }
 
+    /**
+     * Updates the selected seat display, ticket total,
+     * and enabled state of the confirm button.
+     */
     private void updateSelectionSummary() {
         String seatNames = selectedSeats.stream()
                 .map(Seat::getSeatNumber)
@@ -74,6 +108,10 @@ public class TicketSelectionController {
         confirmButton.setDisable(selectedSeats.isEmpty());
     }
 
+    /**
+     * Generates a 7-by-7 grid of seat buttons and assigns each seat
+     * an available, selected, or taken status.
+     */
     private void generateSeatGrid() {
         seatGrid.getChildren().clear();
 
@@ -90,7 +128,7 @@ public class TicketSelectionController {
                 Button seatButton = new Button(seatName);
                 seatButton.setPrefSize(40, 40);
 
-                //TEST CODE DELETE THIS
+                // Temporary sample data for unavailable seats.
                 if (seatName.equals("A3") || seatName.equals("C5") || seatName.equals("F2")) {
                     seat.setSeatStatus(SeatStatus.TAKEN);
                 }
@@ -130,6 +168,14 @@ public class TicketSelectionController {
         }
     }
 
+    /**
+     * Restores the selected movie, showtime, and seats when returning
+     * from the Payment view.
+     *
+     * @param movie the selected movie
+     * @param showtime the selected showtime
+     * @param selectedSeats the seats previously selected by the user
+     */
     public void setMovieShowtimeAndSeats(
         Movie movie,
         Showtime showtime,
@@ -149,6 +195,12 @@ public class TicketSelectionController {
     updateSelectionSummary();
     }
 
+    /**
+     * Opens the Payment view and passes the selected movie,
+     * showtime, and seats to its controller.
+     *
+     * @param event the confirm button event
+     */
     @FXML
     public void handleConfirm(ActionEvent event) {
         if (selectedSeats.isEmpty()) {
