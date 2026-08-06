@@ -65,7 +65,7 @@ public class RegisterController {
 
         registerTask.setOnFailed(event -> {
             isRegistring(false);
-            statusLabel.setText("Error: cannot connect to database!");
+            statusLabel.setText("Error: cannot connect to server!");
         });
 
         new Thread(registerTask).start();

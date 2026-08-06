@@ -12,6 +12,7 @@ import org.ScrumLords.model.Customer;
 import org.ScrumLords.model.Manager;
 import org.ScrumLords.model.User;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.mongodb.client.MongoCollection;
@@ -66,26 +67,7 @@ public class UserService {
         lastName = lastName.trim();
         email = email.trim().toLowerCase();
 
-        if(!USERNAME_PATTERN.matcher(username).matches())
-            return null;
-
-        // Check if username already exists
-        if(users.find(eq("username", username)).first() != null)
-            return null;
-
-        if(firstName.isEmpty() || lastName.isEmpty())
-            return null;
-
-        if(!EMAIL_PATTERN.matcher(email).matches())
-            return null;
-
-        // Check if password is in ASCII format
-        if(!StandardCharsets.US_ASCII.newEncoder().canEncode(password))
-            return null;
-
-        // BCrypt only works on 72 bytes or less before truncating the String
-        // Each ASCII character is 1 byte so max length is 72
-        if(password.length() > 72)
+        if(!(verifyUsername(username) && verifyNames(firstName, lastName) && verifyEmail(email) && verifyPassword(password)))
             return null;
 
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
@@ -102,6 +84,93 @@ public class UserService {
         return toUser(doc);
     }
 
+    /**
+     * Updates a user's modifiyable information.
+     * @param userId The userId String of the desired user to update.
+     * @param firstName A first name String that the user amends to.
+     * @param lastName A last name String that the user amends to.
+     * @param email An email String that the user amends to.
+     * @return An instantiated User updated with new profile information.
+     */
+    public User updateProfile(String userId, String firstName, String lastName, String email) {
+        firstName = firstName.trim();
+        lastName = lastName.trim();
+        email = email.trim().toLowerCase();
+
+        if(!(verifyNames(firstName, lastName) && verifyEmail(email)))
+            return null;
+
+        Document filter = new Document("_id", new ObjectId(userId));
+        Document update = new Document("$set", new Document("firstName", firstName)
+            .append("lastName", lastName)
+            .append("email", email)
+        );
+
+        users.updateOne(filter, update);
+
+        Document doc = users.find(filter).first();
+        return toUser(doc);
+    }
+
+    /**
+     * Check if the username is formatted properly.
+     * @param username A username String to verify against.
+     * @return A boolean of the username's validity.
+     */
+    private boolean verifyUsername(String username) {
+        // Check if username matches regex pattern
+        if(!USERNAME_PATTERN.matcher(username).matches())
+            return false;
+
+        // Check if username already exists
+        if(users.find(eq("username", username)).first() != null)
+            return false;
+
+        return true;
+    }
+
+    /**
+     * Check if the first and last names are formatted properly.
+     * @param firstName A first name String to verify against.
+     * @param lastName A last name String to verify against.
+     * @return A boolean of the names' validity.
+     */
+    private boolean verifyNames(String firstName, String lastName) {
+        return !firstName.isEmpty() && !lastName.isEmpty();
+    }
+
+    /**
+     * Check if the email is formatted properly.
+     * @param email An email String to verify against.
+     * @return A boolean of the email's validity.
+     */
+    private boolean verifyEmail(String email) {
+        return EMAIL_PATTERN.matcher(email).matches();
+    }
+
+    /**
+     * Check if the password is formatted properly
+     * @param password A plaintext password String to verify against.
+     * @return A boolean of the password's validity.
+     */
+    private boolean verifyPassword(String password) {
+        // Check if password is in ASCII format
+        if(!StandardCharsets.US_ASCII.newEncoder().canEncode(password))
+            return false;
+
+        // BCrypt only works on 72 bytes or less before truncating the String
+        // Each ASCII character is 1 byte so max length is 72
+        if(password.length() > 72)
+            return false;
+        
+        return true;
+    }
+
+    /**
+     * Convert a MongoDB Document into an appropriate instantiated User class.
+     * @param doc The MongoDB document to base the new User object off of.
+     * @return An instantiated implementation of a User object. Will be either a Customer, Manager, or Admin based on the user's role.
+     */
     private User toUser(Document doc) {
         String userId = doc.getObjectId("_id").toString();
         String username = doc.getString("username");
