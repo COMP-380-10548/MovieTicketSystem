@@ -14,6 +14,9 @@ import javafx.scene.layout.GridPane;
 
 import java.time.format.DateTimeFormatter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TicketSelectionController {
 
     private Movie movie;
@@ -33,14 +36,11 @@ public class TicketSelectionController {
 
     }
 
+    private List<Seat> selectedSeats = new ArrayList();
+
     @FXML
     public void goBack(ActionEvent event) {
         SceneManager.goBack();
-    }
-
-    @FXML
-    public void handleConfirm(ActionEvent event) {
-
     }
 
     public void setMovieAndShowtime(Movie movie, Showtime showtime) {
@@ -80,14 +80,13 @@ public class TicketSelectionController {
                 }
 
                 seatButton.setOnAction(event -> {
-                    if (seat.getSeatStatus() == SeatStatus.TAKEN) {
-                        return;
-                    }
                     if (seat.getSeatStatus() == SeatStatus.AVAILABLE) {
                         seat.setSeatStatus(SeatStatus.SELECTED);
+                        selectedSeats.add(seat);
                         seatButton.setStyle("-fx-background-color: #E74C3C;");
-                    } else {
+                    } else if (seat.getSeatStatus() == SeatStatus.SELECTED) {
                         seat.setSeatStatus(SeatStatus.AVAILABLE);
+                        selectedSeats.remove(seat);
                         seatButton.setStyle("-fx-background-color: #4A90E2;");
                     }
                 });
@@ -95,5 +94,39 @@ public class TicketSelectionController {
                 seatGrid.add(seatButton, column, row);
             }
         }
+    }
+
+    public void setMovieShowtimeAndSeats(
+        Movie movie,
+        Showtime showtime,
+        List<Seat> selectedSeats) {
+
+    this.movie = movie;
+    this.showtime = showtime;
+    this.selectedSeats = new ArrayList<>(selectedSeats);
+
+    DateTimeFormatter formatter =
+            DateTimeFormatter.ofPattern("h:mm a");
+
+    movieTitleLabel.setText(movie.getTitle() + " Ticket Selection");
+    showtimeLabel.setText(showtime.getStartTime().format(formatter));
+
+    generateSeatGrid();
+    }
+
+    @FXML
+    public void handleConfirm(ActionEvent event) {
+        if (selectedSeats.isEmpty()) {
+            return;
+        }
+
+        SceneManager.<PaymentController>switchToScene(
+            "/org/ScrumLords/view/Payment.fxml",
+            controller -> controller.setCheckoutDetails(
+                movie,
+                showtime,
+                selectedSeats
+            )
+        );
     }
 }

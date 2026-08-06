@@ -66,7 +66,9 @@
             </center>
 
             <right>
-                <Button fx:id="confirmButton" disable="true" onAction="#handleConfirm" text="Confirm" />
+                <Button fx:id="confirmButton"
+                        text="Confirm"
+                        onAction="#handleConfirm" />
             </right>
         </BorderPane>
     </bottom>
