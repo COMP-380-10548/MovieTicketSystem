@@ -1,17 +1,21 @@
 package org.ScrumLords.controller;
 
 import org.ScrumLords.SceneManager;
+import org.ScrumLords.SessionManager;
+import org.ScrumLords.UserService;
+import org.ScrumLords.model.User;
 
-import javafx.animation.PauseTransition;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.util.Duration;
 
 public class LoginController {
+
+    private final UserService userService = new UserService();
     
     @FXML
     private TextField usernameField;
@@ -31,22 +35,46 @@ public class LoginController {
         String password = passwordField.getText();
 
         loginButton.setDisable(true);
+        usernameField.setDisable(true);
+        passwordField.setDisable(true);
         statusLabel.setText("Status: validating login...");
-        PauseTransition pause = new PauseTransition(Duration.seconds(1));
 
-        // Kind of pointless login delay but added cus whynot
-        pause.setOnFinished(event -> {
-            // TODO: add actual login validation
-            if (username.equals("admin") && password.equals("admin")) {
-                SceneManager.switchToScene("/org/ScrumLords/view/MainPage.fxml", (MainPageController controller) -> {
-                    controller.setUsername(username);
-                });
-            } else {
-                loginButton.setDisable(false);
-                statusLabel.setText("Status: invalid login.");
+        // Task object that defines what the thread returns
+        // In this case: a User from the userService
+        Task<User> loginTask = new Task<>() {
+            @Override
+            protected User call() {
+                return userService.authenticate(username, password);
             }
+        };
+
+        // When thread finishes, manage returned User
+        loginTask.setOnSucceeded(event -> {
+           User user = loginTask.getValue();
+           if (user != null) {
+            SessionManager.store(user);
+            SceneManager.switchToScene("MainPage", null);
+           } else {
+            loginButton.setDisable(false);
+            usernameField.setDisable(false);
+            passwordField.setDisable(false);
+            statusLabel.setText("Status: invalid login.");
+           }
         });
-        
-       pause.play();
+
+        // When thread fails, return failure
+        loginTask.setOnFailed(event -> {
+            loginButton.setDisable(false);
+            usernameField.setDisable(false);
+            passwordField.setDisable(false);
+            statusLabel.setText("Status: cannot connect to server");
+        });
+
+        // Starts the thread
+        new Thread(loginTask).start();
+    }
+
+    public void goBack(ActionEvent e) {
+        SceneManager.goBack();
     }
 }

@@ -1,24 +1,22 @@
 package org.ScrumLords.controller;
 
 import org.ScrumLords.SceneManager;
+import org.ScrumLords.SessionManager;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 
-import javafx.scene.control.Alert;
-
 public class AccountController {
-
-    private String username;
 
     @FXML
     private Label usernameLabel, nameLabel, emailLabel;
 
     @FXML
     public void handleLogout(ActionEvent event) {
-        SceneManager.switchToScene("/org/ScrumLords/view/Login.fxml",null);
+        SessionManager.release();
+        SceneManager.switchToScene("MainPage",null);
     }
 
     @FXML
@@ -41,10 +39,7 @@ public class AccountController {
 
     @FXML
     public void handleBack(ActionEvent event) {
-        SceneManager.<MainPageController>switchToScene(
-            "/org/ScrumLords/view/MainPage.fxml", 
-            controller -> controller.setUsername(username)
-        );
+        SceneManager.goBack();
     }
 
     @FXML
@@ -54,11 +49,6 @@ public class AccountController {
         alert.setHeaderText(null);
         alert.setContentText("Account deletion is not yet available.");
         alert.showAndWait();
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-        usernameLabel.setText(username);
     }
 
     @FXML

@@ -28,7 +28,7 @@
             spacing="15.0" />
 
       <Button mnemonicParsing="false"
-              onAction="#returnToParent"
+              onAction="#goBack"
               text="Back">
          <VBox.margin>
             <Insets top="30.0" />

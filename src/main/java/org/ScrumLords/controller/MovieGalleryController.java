@@ -28,10 +28,8 @@ public class MovieGalleryController {
 
     private List<Movie> movies;
 
-    private String username;
-
     @FXML
-    private Button returnButton;
+    private Button backButton;
 
     @FXML
     private TextField searchField;
@@ -138,7 +136,7 @@ public class MovieGalleryController {
         movies.add(new Movie("3a", "Minecraft", "PG", 101, null, "Fantasy adventure","/org/ScrumLords/images/minecraft.jpg", minecraftShowtimes));
         movies.add(new Movie("4a", "Batman", "PG-13", 176, null, "Superhero crime drama","/org/ScrumLords/images/batman.jpg", batmanShowtimes));
 
-        Platform.runLater(() -> returnButton.requestFocus());
+        Platform.runLater(() -> backButton.requestFocus());
 
         displayMovies(movies);
     }
@@ -173,7 +171,7 @@ public class MovieGalleryController {
             index += 1;
 
             movieContainer.setOnMouseClicked(event -> {
-                SceneManager.<MovieDetailsController>switchToScene("/org/ScrumLords/view/MovieDetails.fxml", 
+                SceneManager.<MovieDetailsController>switchToScene("MovieDetails", 
                 controller -> {
                     controller.setMovie(movie);
                 });
@@ -182,19 +180,8 @@ public class MovieGalleryController {
     }
 
     // TODO: use setUserData to associate each movie item with a specific movie
-    public void viewMovieDetails(ActionEvent e) {
-       SceneManager.switchToScene("MovieDetails.fxml", null); 
-    }
 
-    public void returnToMainPage(ActionEvent e) {
-        SceneManager.<MainPageController>switchToScene(
-        "/org/ScrumLords/view/MainPage.fxml", 
-        controller -> {
-            controller.setUsername(username);
-        });
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void goBack(ActionEvent e) {
+        SceneManager.goBack();
     }
 }
