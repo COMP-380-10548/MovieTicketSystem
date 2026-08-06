@@ -26,7 +26,7 @@ public class LoginController {
     private Label statusLabel;
 
     public void submitLogin(ActionEvent e) {
-        
+
         String username = usernameField.getText();
         String password = passwordField.getText();
 
