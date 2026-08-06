@@ -14,9 +14,16 @@ import javafx.scene.layout.VBox;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Controls the Movie Showtimes view.
+ * Displays the selected movie's available showtimes and allows
+ * the user to continue to ticket selection.
+ *
+ * @author A. Garcia
+ * @version 1.0
+ */
 public class MovieShowtimesController {
 
-    // example of array of showtimes to display for a movie. can be reworked.
     private List<Showtime> showtimes;
 
     private Movie movie;
@@ -27,11 +34,19 @@ public class MovieShowtimesController {
     @FXML
     private VBox showtimeContainer;
 
+    /**
+     * Initializes the Movie Showtimes controller.
+     */
     @FXML
     private void initialize() {
         
     }
 
+    /**
+     * Creates and displays one button for each available showtime.
+     * Selecting a showtime opens the Ticket Selection view and passes
+     * the selected movie and showtime to its controller.
+     */
     private void displayShowtimes() {
         showtimeContainer.getChildren().clear();
 
@@ -60,10 +75,27 @@ public class MovieShowtimesController {
         }
     }
 
+    /**
+     * Returns the user to the Movie Details view while preserving
+     * the selected movie.
+     *
+     * @param event the back button event
+     */
+    @FXML
     public void goBack(ActionEvent event) {
-        SceneManager.goBack();
+        SceneManager.<MovieDetailsController>switchToScene(
+            "MovieDetails",
+            controller -> controller.setMovie(movie)
+        );
     }
 
+    /**
+     * Stores the selected movie and its showtimes, updates the movie
+     * title, and displays the available showtime buttons.
+     *
+     * @param movie the selected movie
+     * @param showtimes the movie's available showtimes
+     */
     public void setMovieShowtimes(Movie movie, List<Showtime> showtimes) {
         this.movie = movie;
         this.showtimes = showtimes;

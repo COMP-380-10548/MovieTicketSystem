@@ -2,6 +2,14 @@ package org.ScrumLords.model;
 
 import java.util.List;
 
+/**
+ * Represents a movie ticket booking made by a customer.
+ * Stores booking information, selected seats, payment details,
+ * and the current booking status.
+ *
+ * @author A. Garcia
+ * @version 1.0
+ */
 public class Booking {
     private int bookingId;
     private int showtimeId;
@@ -11,6 +19,17 @@ public class Booking {
     private String transactionId;
     private String bookingStatus;
 
+    /**
+     * Constructs a Booking object.
+     *
+     * @param bookingId unique identifier for the booking
+     * @param showtimeId identifier of the booked showtime
+     * @param userId identifier of the customer who made the booking
+     * @param seatNumbers list of reserved seat numbers
+     * @param totalPrice total cost of the booking
+     * @param transactionId payment transaction identifier
+     * @param bookingStatus current status of the booking
+     */
     public Booking(int bookingId, int showtimeId, int userId, List<String> seatNumbers, double totalPrice, String transactionId, String bookingStatus) {
         this.bookingId = bookingId;
         this.showtimeId = showtimeId;
@@ -21,15 +40,15 @@ public class Booking {
         this.bookingStatus = bookingStatus;
     }
 
-    public int getBookingId() { //maybe not needed
+    public int getBookingId() {
         return bookingId;
     }
 
-    public int getShowtimeId() { //maybe not needed
+    public int getShowtimeId() {
         return showtimeId;
     }
 
-    public int getUserId() { //maybe not needed
+    public int getUserId() {
         return userId;
     }
 
@@ -49,6 +68,7 @@ public class Booking {
         return bookingStatus;
     }
 
-    //viewBookingDetails()
-    //generateTicket()
+    // Future enhancements:
+    // - viewBookingDetails()
+    // - generateTicket()
 }

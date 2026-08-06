@@ -15,6 +15,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+/**
+ * Controls the Payment view.
+ * Displays checkout details, calculates the order total,
+ * and manages navigation between payment and ticket selection.
+ *
+ * @author A. Garcia
+ * @version 1.0
+ */
 public class PaymentController {
 
     private Movie movie;
@@ -60,6 +68,14 @@ public class PaymentController {
     @FXML
     private Button payButton;
 
+    /**
+     * Stores and displays the selected movie, showtime, seats,
+     * ticket subtotal, sales tax, and final total.
+     *
+     * @param movie the selected movie
+     * @param showtime the selected showtime
+     * @param selectedSeats the seats selected by the user
+     */
     public void setCheckoutDetails(
             Movie movie,
             Showtime showtime,
@@ -99,6 +115,12 @@ public class PaymentController {
         totalCostLabel.setText(String.format("$%.2f", totalCost));
     }
 
+    /**
+     * Returns the user to the Ticket Selection view while preserving
+     * the selected movie, showtime, and seats.
+     *
+     * @param event the back button event
+     */
     @FXML
     public void handleBack(ActionEvent event) {
         SceneManager.<TicketSelectionController>switchToScene(
@@ -111,6 +133,12 @@ public class PaymentController {
         );
     }
 
+    /**
+     * Processes the payment form submission.
+     * Payment processing is not yet implemented.
+     *
+     * @param event the payment button event
+     */
     @FXML
     public void handlePayment(ActionEvent event) {
 
