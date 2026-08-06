@@ -2,10 +2,12 @@ package org.ScrumLords.controller;
 
 import org.ScrumLords.SceneManager;
 import org.ScrumLords.UserService;
+import org.ScrumLords.model.User;
 
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -37,16 +39,24 @@ public class RegisterController {
 
         isRegistring(true);
 
-        Task<Boolean> registerTask = new Task<>() {
+        Task<User> registerTask = new Task<>() {
             @Override
-            protected Boolean call() {
+            protected User call() {
                 return userService.register(username, firstName, lastName, email, password);
             }
         };
 
         registerTask.setOnSucceeded(event -> {
-            if(registerTask.getValue()) {
+            User newUser = registerTask.getValue();
+            if(newUser != null) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("User Registered Successfully");
+                alert.setHeaderText("User Registered Successfully");
+                alert.setContentText("Username: " + newUser.getUsername() + "\nEmail: " + newUser.getEmail());
+                alert.showAndWait();
+
                 SceneManager.switchToScene("MainPage", null);
+                SceneManager.clearHistory();
             } else {
                 isRegistring(false);
                 statusLabel.setText("Error: invalid inputs!");
