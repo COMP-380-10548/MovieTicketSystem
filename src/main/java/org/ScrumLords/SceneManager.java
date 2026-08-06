@@ -54,6 +54,10 @@ public final class SceneManager {
             loadScene(previousScene, null);
     }
 
+    public static void clearHistory() {
+        history.clear();
+    }
+
     private static <T> void loadScene(String scenePath, Consumer<T> controllerConsumer) {
 
         try {
