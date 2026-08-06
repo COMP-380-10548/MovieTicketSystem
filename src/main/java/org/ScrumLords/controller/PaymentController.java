@@ -102,7 +102,7 @@ public class PaymentController {
     @FXML
     public void handleBack(ActionEvent event) {
         SceneManager.<TicketSelectionController>switchToScene(
-            "/org/ScrumLords/view/TicketSelection.fxml",
+            "TicketSelection",
             controller -> controller.setMovieShowtimeAndSeats(
                 movie,
                 showtime,
