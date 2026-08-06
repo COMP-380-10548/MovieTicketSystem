@@ -5,11 +5,13 @@ import org.ScrumLords.model.Booking;
 import org.ScrumLords.model.Customer;
 import org.ScrumLords.model.Manager;
 import org.ScrumLords.model.User;
-import org.bson.Document;
 
+import org.bson.Document;
 import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Filters.eq;
+import org.mindrot.jbcrypt.BCrypt;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -32,11 +34,11 @@ public class UserService {
     public User authenticate(String username, String password) {
         Document doc = users.find(eq("username", username)).first();
 
-        if(doc == null) {
-            System.out.println("Document doesn't exist! D:");
+        if(doc == null)
             return null;
-        }
-        if(!doc.getString("password").equals(password))
+
+        String storedHash = doc.getString("password");
+        if(!BCrypt.checkpw(password, storedHash))
             return null;
 
         return toUser(doc);
@@ -52,13 +54,25 @@ public class UserService {
      * @return Boolean showing if the new user was created successfully.
      */
     public boolean register(String username, String firstName, String lastName, String email, String password) {
+        username = username.trim().toLowerCase();
+        firstName = firstName.trim();
+        lastName = lastName.trim();
+        email = email.trim().toLowerCase();
+
         if(users.find(eq("username", username)).first() != null)
             return false;
+
+        // BCrypt only works on 72 bytes (of UTF_8 characters) or less before truncating the String
+        if(password.getBytes(StandardCharsets.UTF_8).length > 72)
+            return false;
+
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
         Document doc = new Document("username", username)
             .append("firstName", firstName)
             .append("lastName", lastName)
             .append("email", email)
+            .append("password", hashedPassword)
             .append("role", "customer")
             .append("bookingHistory", List.of());
         

@@ -56,10 +56,6 @@ public class MainPageController {
 
     @FXML
     public void startRegister(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Feature Unavailable");
-        alert.setHeaderText(null);
-        alert.setContentText("Account registration is not yet available.");
-        alert.showAndWait();
+        SceneManager.switchToScene("Register", null);
     }
 }
