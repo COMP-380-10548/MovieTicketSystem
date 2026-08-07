@@ -54,6 +54,9 @@ public final class SceneManager {
             loadScene(previousScene, null);
     }
 
+    /**
+     * Clear the scene history. Useful when the app navigates back directly to MainPage.
+     */
     public static void clearHistory() {
         history.clear();
     }

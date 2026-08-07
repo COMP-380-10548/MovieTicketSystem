@@ -5,7 +5,7 @@ import org.ScrumLords.model.User;
 /**
  * Utility class that holds the authenticated user within an accessible class other controllers and models can access.
  */
-public class SessionManager {
+public final class SessionManager {
     private static User currentUser;
 
     private SessionManager() {}

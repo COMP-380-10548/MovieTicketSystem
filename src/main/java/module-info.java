@@ -13,4 +13,6 @@ module org.ScrumLords {
     opens org.ScrumLords.controller to javafx.fxml;
 
     exports org.ScrumLords;
+    exports org.ScrumLords.controller;
+    exports org.ScrumLords.model;
 }
