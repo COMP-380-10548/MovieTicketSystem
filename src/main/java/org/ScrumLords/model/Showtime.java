@@ -20,8 +20,8 @@ public class Showtime {
     /**
      * Constructs a Showtime object.
      *
-     * @param showtimeID unique identifier for the showtime
-     * @param movieID identifier of the associated movie
+     * @param showtimeId unique identifier for the showtime
+     * @param movieId identifier of the associated movie
      * @param startTime scheduled start time
      * @param endTime scheduled end time
      */
