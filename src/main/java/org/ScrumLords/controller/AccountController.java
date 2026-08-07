@@ -21,7 +21,7 @@ import javafx.scene.layout.HBox;
  * editing profile details, changing password, and logging out.
  *
  * @author A. Garcia
- * @author C Wichman
+ * @author C. Wichman
  * @version 1.0
  * @since 2026-08-03
  */

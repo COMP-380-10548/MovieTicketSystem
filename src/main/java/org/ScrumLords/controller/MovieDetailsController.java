@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
  * Controls the Movie Details view.
  * Displays information about a selected movie and
  * allows users to navigate to available showtimes.
- *
+ * 
  * @author A. Garcia
  * @version 1.0
  * @since 2026-06-28

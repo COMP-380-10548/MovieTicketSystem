@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
  * Submits new account registrations to the UserService and
  * navigates to MainPage on success.
  *
- * @author C Wichman
+ * @author C. Wichman
  * @version 1.0
  * @since 2026-08-06
  */

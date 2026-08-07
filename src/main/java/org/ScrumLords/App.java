@@ -7,7 +7,7 @@ import javafx.stage.Stage;
  * Entry point of the MovieTicketSystem
  * Initializes the primary stage and launches the primary scene.
  *
- * @author C Wichman
+ * @author C. Wichman
  * @author A. Garcia
  * @version 1.0
  * @since 2026-06-21

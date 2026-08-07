@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
  * Authenticates user credentials against the UserService and
  * stores the resulting user in the session on success.
  *
- * @author C Wichman
+ * @author C. Wichman
  * @version 1.0
  * @since 2026-06-25
  */
