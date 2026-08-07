@@ -1,25 +1,141 @@
-# MovieTicketSystem
+# Movie Ticket Booking System
 
-Implementation of a Movie Theater Ticketing System utilizing a Java-based stack:
-- Java for backend
-- JavaFX for frontend
-- GitHub for source control
-- JIRA for project management
+A JavaFX desktop application developed for **COMP 380 – Software Engineering** at **California State University, Northridge (CSUN)**. The application allows users to browse movies, view showtimes, select seats, and simulate the movie ticket purchasing process.
 
-## TODO:
+---
 
-- Determine library management system
-- Determine database system
-- Determine UML designer
+## Technologies Used
 
-## Workflow:
+- Java 25
+- JavaFX
+- Maven
+- MongoDB Atlas
+- Git & GitHub
+- Jira
+- VS Code
 
-Each member should develop individual features within feature branches branched off of the `dev` branch.
+---
 
-These feature branches can be worked on locally and pushed to origin to save progress.
+## Features
 
-Once completed, a pull request back to the `dev` branch to merge the feature should be created and completed.
+### Customer Features
 
-After each SCRUM, a pull request merging `dev` into `main` should be created and approved by all team members.
+- User registration and login
+- Browse available movies
+- Search movies by title or description
+- View movie details
+- View available showtimes
+- Select available seats
+- View checkout summary
+- Simulated payment screen
+- Account management
 
-(This is assuming that I set up the GitHub ruleset properly)
+### Administrative Features
+
+- User account management
+- Administrative movie management *(planned)*
+- Administrative reporting features *(planned)*
+
+---
+
+## Architecture
+
+The application follows the **Model-View-Controller (MVC)** architectural pattern.
+
+- **Model** – Represents domain objects and application data.
+- **View** – JavaFX FXML user interface files.
+- **Controller** – Handles user interaction, business logic, and scene navigation.
+
+---
+
+## Project Structure
+
+```text
+src
+├── controller
+├── model
+├── resources
+│   ├── images
+│   └── view
+└── SceneManager.java
+```
+
+---
+
+## Application Flow
+
+```text
+Main Page
+    ↓
+Movie Gallery
+    ↓
+Movie Details
+    ↓
+Movie Showtimes
+    ↓
+Ticket Selection
+    ↓
+Payment
+```
+
+---
+
+## Running the Project
+
+Clone the repository:
+
+```bash
+git clone https://github.com/COMP-380-10548/MovieTicketSystem.git
+```
+
+Navigate to the project directory:
+
+```bash
+cd MovieTicketSystem
+```
+
+Run the application:
+
+```bash
+mvn clean javafx:run
+```
+
+> **Note:** Payment processing is currently simulated for demonstration purposes.
+
+---
+
+## Project Workflow
+
+Each team member develops features in individual feature branches created from the `dev` branch.
+
+Completed work is submitted through Pull Requests and reviewed before being merged into the `dev` branch.
+
+At the end of each sprint, the `dev` branch is merged into `main` after team approval.
+
+---
+
+## Team Members
+
+- Andrew Garcia
+- Cameron Wichman
+- Erik Avalyan
+- Ian Coumbe
+
+---
+
+## Future Improvements
+
+- MongoDB data persistence
+- Booking history
+- Shopping cart
+- Ticket generation
+- Concessions
+- Administrative dashboard
+- Sales reporting
+- Payment processing integration
+
+---
+
+## License
+
+Developed as part of **COMP 380 – Software Engineering** at **California State University, Northridge (CSUN)** for educational purposes.
