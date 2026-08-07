@@ -17,7 +17,7 @@
     <top>
         <HBox alignment="CENTER" spacing="20.0">
             <padding>
-                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+                <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
             </padding>
          <children>
             <Button fx:id="manageButton" mnemonicParsing="false" onAction="#launchManage" text="Management" />
@@ -25,6 +25,9 @@
       
                <Button fx:id="logoutButton" onAction="#handleLogout" text="Logout" />
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
         </HBox>
     </top>
 
@@ -83,23 +86,17 @@
 
         </VBox>
     </center>
-
-    <bottom>
-        <BorderPane>
-
-            <padding>
-                <Insets bottom="25.0" left="100.0" right="100.0" top="20.0" />
-            </padding>
-
-            <left>
+   <bottom>
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
                 <Button fx:id="backButton" onAction="#handleBack" prefHeight="26.0" prefWidth="54.0" text="Back" />
-            </left>
-
-            <right>
+            <Region HBox.hgrow="ALWAYS" />
                 <Button onAction="#handleDeleteAccount" style="-fx-text-fill: red;" text="Delete Account" />
-            </right>
-
-        </BorderPane>
-    </bottom>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
 
 </BorderPane>
