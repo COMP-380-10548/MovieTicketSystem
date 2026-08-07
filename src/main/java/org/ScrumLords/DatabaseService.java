@@ -11,6 +11,10 @@ import io.github.cdimascio.dotenv.Dotenv;
 /**
  * Singleton wrapper around the MongoDB client class.
  * Provides access to collections within the MovieTicketDatabase.
+ *
+ * @author C. Wichman
+ * @version 1.0
+ * @since 2026-08-04
  */
 public class DatabaseService {
     private static DatabaseService instance;

@@ -14,9 +14,9 @@ import javafx.scene.control.Label;
  * Updates the displayed options based on the current login session
  * and provides navigation to account, login, registration, and movie gallery screens.
  *
- * @author C Wichman
  * @author A. Garcia
  * @version 1.0
+ * @since 2026-06-29
  */
 public class MainPageController {
     

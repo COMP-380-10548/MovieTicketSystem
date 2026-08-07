@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
  *
  * @author A. Garcia
  * @version 1.0
+ * @since 2026-08-04
  */
 public class TicketSelectionController {
 

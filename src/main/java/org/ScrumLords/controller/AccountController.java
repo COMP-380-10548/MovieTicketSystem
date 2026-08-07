@@ -15,6 +15,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
+/**
+ * Controls the Account view.
+ * Displays the current user's profile information and allows
+ * editing profile details, changing password, and logging out.
+ *
+ * @author A. Garcia
+ * @author C. Wichman
+ * @version 1.0
+ * @since 2026-08-03
+ */
 public class AccountController {
     private User currUser = SessionManager.getCurrentUser();
     private UserService userService = new UserService();

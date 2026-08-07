@@ -6,6 +6,7 @@ package org.ScrumLords.model;
  *
  * @author A. Garcia
  * @version 1.0
+ * @since 2026-08-04
  */
 public class Seat {
     private String seatNumber;
@@ -24,6 +25,8 @@ public class Seat {
 
     /**
      * Represents the possible states of a seat.
+     *
+     * @since 2026-08-04
      */
     public enum SeatStatus {
         AVAILABLE,

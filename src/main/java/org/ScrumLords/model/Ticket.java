@@ -7,6 +7,7 @@ package org.ScrumLords.model;
  *
  * @author A. Garcia
  * @version 1.0
+ * @since 2026-08-03
  */
 public class Ticket {
     private int ticketId;
