@@ -20,6 +20,8 @@ import com.mongodb.client.MongoCollection;
 /**
  * Handles user authentication and registration against the users collection via the DatabaseService.
  * Maps retrieved MongoDB documents to a subclass of the User template for user instantiation.
+ *
+ * @since 2026-08-05
  */
 public class UserService {
     // Reference https://regexr.com/

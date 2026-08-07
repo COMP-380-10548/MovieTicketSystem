@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
  * @author C Wichman
  * @author A. Garcia
  * @version 1.0
+ * @since 2026-06-29
  */
 public class MainPageController {
     

@@ -8,6 +8,7 @@ import java.util.List;
  * 
  * @author A. Garcia
  * @version 1.0
+ * @since 2026-06-30
  */
 public class Movie {
     private String movieId;

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
  *
  * @author A. Garcia
  * @version 1.0
+ * @since 2026-07-29
  */
 public class Showtime {
     private int showtimeId;

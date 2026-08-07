@@ -13,6 +13,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+/**
+ * Controls the Login view.
+ * Authenticates user credentials against the UserService and
+ * stores the resulting user in the session on success.
+ *
+ * @author C Wichman
+ * @version 1.0
+ * @since 2026-06-25
+ */
 public class LoginController {
 
     private final UserService userService = new UserService();

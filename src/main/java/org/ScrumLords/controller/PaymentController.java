@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
  *
  * @author A. Garcia
  * @version 1.0
+ * @since 2026-08-05
  */
 public class PaymentController {
 

@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
  *
  * @author A. Garcia
  * @version 1.0
+ * @since 2026-06-28
  */
 public class MovieDetailsController {
 

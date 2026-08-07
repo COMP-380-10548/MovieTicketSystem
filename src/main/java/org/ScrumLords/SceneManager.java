@@ -13,6 +13,8 @@ import javafx.fxml.FXMLLoader;
 /**
  * Static utilities that manages the JavaFX Stage's active scenes.
  * Allows scene switching by name and scene history management through a stack.
+ *
+ * @since 2026-06-28
  */
 public final class SceneManager {
 
