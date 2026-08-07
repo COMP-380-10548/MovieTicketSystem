@@ -8,6 +8,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Controls the Main Page view.
@@ -26,6 +30,14 @@ public class MainPageController {
     @FXML
     private Button accountButton, loginButton, registerButton;
 
+    @FXML
+    private Button logoButton;
+
+    @FXML
+    private ImageView logoImage;
+
+    private javafx.scene.image.Image logo;
+
     /**
      * Initializes the page based on the current user session.
      * Displays account controls for logged-in users and login and
@@ -38,6 +50,9 @@ public class MainPageController {
 
         accountButton.setVisible(loggedIn);
         accountButton.setManaged(loggedIn);
+
+        logo = new Image("file:src/main/resources/org/ScrumLords/images/Logo.png");
+        logoImage.setImage(logo);
 
         loginButton.setVisible(!loggedIn);
         loginButton.setManaged(!loggedIn);
@@ -80,5 +95,10 @@ public class MainPageController {
     @FXML
     public void startRegister(ActionEvent event) {
         SceneManager.switchToScene("Register", null);
+    }
+
+    @FXML
+    public void handleLogoClick(MouseEvent event) {
+        SceneManager.switchToScene("MainPage", null);
     }
 }
