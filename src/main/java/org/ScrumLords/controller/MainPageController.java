@@ -77,6 +77,11 @@ public class MainPageController {
         SceneManager.switchToScene("MovieGallery", null);
     }
 
+    @FXML
+    public void handleBookings(ActionEvent event) {
+        SceneManager.switchToScene("BookingHistory", null);
+    }
+
     /**
      * Opens the Account view.
      *

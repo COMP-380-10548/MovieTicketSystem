@@ -79,7 +79,7 @@ public class TicketSelectionController {
         this.movie = movie;
         this.showtime = showtime;
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy - h:mm a");
 
         movieTitleLabel.setText(movie.getTitle() + " Ticket Selection");
         showtimeLabel.setText(showtime.getStartTime().format(formatter));
@@ -187,7 +187,7 @@ public class TicketSelectionController {
     this.selectedSeats = new ArrayList<>(selectedSeats);
 
     DateTimeFormatter formatter =
-            DateTimeFormatter.ofPattern("h:mm a");
+            DateTimeFormatter.ofPattern("MMMM d, yyyy - h:mm a");
 
     movieTitleLabel.setText(movie.getTitle() + " Ticket Selection");
     showtimeLabel.setText(showtime.getStartTime().format(formatter));

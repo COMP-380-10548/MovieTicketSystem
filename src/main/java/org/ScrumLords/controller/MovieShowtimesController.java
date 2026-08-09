@@ -58,7 +58,7 @@ public class MovieShowtimesController {
             return;
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy - h:mm a");
 
         for (Showtime showtime : showtimes) {
             Button showtimeButton = new Button(

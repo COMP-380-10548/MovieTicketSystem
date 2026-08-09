@@ -11,6 +11,7 @@ import org.ScrumLords.model.Showtime;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -94,7 +95,7 @@ public class PaymentController {
         double totalCost = ticketTotal + salesTax;
 
         DateTimeFormatter formatter =
-                DateTimeFormatter.ofPattern("h:mm a");
+                DateTimeFormatter.ofPattern("MMMM d, yyyy - h:mm a");
 
         String seatNames = selectedSeats.stream()
                 .map(Seat::getSeatNumber)
@@ -142,6 +143,68 @@ public class PaymentController {
      */
     @FXML
     public void handlePayment(ActionEvent event) {
+        if (cardholderNameField.getText().isBlank()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Payment");
+            alert.setHeaderText("Missing Cardholder Name");
+            alert.setContentText("Please enter the cardholder's name.");
+            alert.showAndWait();
+            return;
+        }
+
+        if (!cardNumberField.getText().matches("\\d{16}")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Payment");
+            alert.setHeaderText("Incorrect Card number");
+            alert.setContentText("Please enter 16 digits for the card number with no spaces or '-'.");
+            alert.showAndWait();
+            return;
+        }
+
+        if (!cvvField.getText().matches("\\d{3}")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Payment");
+            alert.setHeaderText("Incorrect CVV number");
+            alert.setContentText("Please enter 3 digits for the CVV number.");
+            alert.showAndWait();
+            return;
+        }
+
+        if(!expirationField.getText().matches("\\d{2}/\\d{2}")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Payment");
+            alert.setHeaderText("Incorrect Expiry");
+            alert.setContentText("Please enter 2 digits for the month, /, and 2 digits for the year (mm/yy).");
+            alert.showAndWait();
+            return;
+        }
+
+        if(!billingZipField.getText().matches("\\d{5}")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Payment");
+            alert.setHeaderText("Incorrect zip code");
+            alert.setContentText("Please enter 5 digits for the zip code.");
+            alert.showAndWait();
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Booking success");
+        alert.setHeaderText("Payment Received");
+        alert.setContentText("Payment has been received, please proceed to view your booking.");
+        alert.showAndWait();
+
+        SceneManager.<BookingHistoryController>switchToScene(
+            "BookingHistory",
+            controller -> controller.setNewBooking(
+                movie,
+                showtime,
+                selectedSeats
+            )
+        );
+    }
+
+    public void initialize() {
 
     }
 }
