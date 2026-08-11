@@ -19,10 +19,11 @@ import javafx.scene.control.TextField;
 /**
  * Controls the Payment view.
  * Displays checkout details, calculates the order total,
- * and manages navigation between payment and ticket selection.
+ * validates payment information, and manages navigation
+ * between payment and ticket selection.
  *
  * @author A. Garcia
- * @version 1.0
+ * @version 1.1
  * @since 2026-08-05
  */
 public class PaymentController {
@@ -87,11 +88,10 @@ public class PaymentController {
         this.showtime = showtime;
         this.selectedSeats = selectedSeats;
 
-        double ticketPrice = 12.00;
         int ticketCount = selectedSeats.size();
 
-        double ticketTotal = ticketPrice * ticketCount;
-        double salesTax = ticketTotal * 0.0725;
+        double ticketTotal = calculateTicketTotal(ticketCount);
+        double salesTax = calculateSalesTax(ticketTotal);
         double totalCost = ticketTotal + salesTax;
 
         DateTimeFormatter formatter =
@@ -110,11 +110,82 @@ public class PaymentController {
         selectedSeatsLabel.setText(seatNames);
 
         ticketCountLabel.setText(
-                String.valueOf(selectedSeats.size())
+                String.valueOf(ticketCount)
         );
-        ticketTotalLabel.setText(String.format("$%.2f", ticketTotal));
-        taxLabel.setText(String.format("$%.2f", salesTax));
-        totalCostLabel.setText(String.format("$%.2f", totalCost));
+
+        ticketTotalLabel.setText(
+                String.format("$%.2f", ticketTotal)
+        );
+
+        taxLabel.setText(
+                String.format("$%.2f", salesTax)
+        );
+
+        totalCostLabel.setText(
+                String.format("$%.2f", totalCost)
+        );
+    }
+
+    /**
+     * Calculates the subtotal for the selected number of tickets.
+     *
+     * @param ticketCount number of tickets being purchased
+     * @return the ticket subtotal
+     */
+    public double calculateTicketTotal(int ticketCount) {
+        double ticketPrice = 12.00;
+
+        return ticketPrice * ticketCount;
+    }
+
+    /**
+     * Calculates sales tax for the ticket subtotal.
+     *
+     * @param ticketTotal the subtotal before tax
+     * @return the calculated sales tax
+     */
+    public double calculateSalesTax(double ticketTotal) {
+        return ticketTotal * 0.0725;
+    }
+
+    /**
+     * Validates payment information.
+     *
+     * @param cardholderName name on the card
+     * @param cardNumber 16-digit card number
+     * @param cvv 3-digit CVV
+     * @param expiration expiration date in MM/YY format
+     * @param billingZip 5-digit billing ZIP code
+     * @return an error message if invalid, otherwise null
+     */
+    public String validatePayment(
+            String cardholderName,
+            String cardNumber,
+            String cvv,
+            String expiration,
+            String billingZip) {
+
+        if (cardholderName.isBlank()) {
+            return "Please enter the cardholder's name.";
+        }
+
+        if (!cardNumber.matches("\\d{16}")) {
+            return "Please enter 16 digits for the card number with no spaces or '-'.";
+        }
+
+        if (!cvv.matches("\\d{3}")) {
+            return "Please enter 3 digits for the CVV number.";
+        }
+
+        if (!expiration.matches("\\d{2}/\\d{2}")) {
+            return "Please enter the expiration date in MM/YY format.";
+        }
+
+        if (!billingZip.matches("\\d{5}")) {
+            return "Please enter 5 digits for the ZIP code.";
+        }
+
+        return null;
     }
 
     /**
@@ -125,13 +196,14 @@ public class PaymentController {
      */
     @FXML
     public void handleBack(ActionEvent event) {
+
         SceneManager.<TicketSelectionController>switchToScene(
-            "TicketSelection",
-            controller -> controller.setMovieShowtimeAndSeats(
-                movie,
-                showtime,
-                selectedSeats
-            )
+                "TicketSelection",
+                controller -> controller.setMovieShowtimeAndSeats(
+                        movie,
+                        showtime,
+                        selectedSeats
+                )
         );
     }
 
@@ -143,64 +215,46 @@ public class PaymentController {
      */
     @FXML
     public void handlePayment(ActionEvent event) {
-        if (cardholderNameField.getText().isBlank()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Payment");
-            alert.setHeaderText("Missing Cardholder Name");
-            alert.setContentText("Please enter the cardholder's name.");
-            alert.showAndWait();
-            return;
-        }
 
-        if (!cardNumberField.getText().matches("\\d{16}")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Payment");
-            alert.setHeaderText("Incorrect Card number");
-            alert.setContentText("Please enter 16 digits for the card number with no spaces or '-'.");
-            alert.showAndWait();
-            return;
-        }
+        String validationError = validatePayment(
+                cardholderNameField.getText(),
+                cardNumberField.getText(),
+                cvvField.getText(),
+                expirationField.getText(),
+                billingZipField.getText()
+        );
 
-        if (!cvvField.getText().matches("\\d{3}")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Payment");
-            alert.setHeaderText("Incorrect CVV number");
-            alert.setContentText("Please enter 3 digits for the CVV number.");
-            alert.showAndWait();
-            return;
-        }
+        if (validationError != null) {
 
-        if(!expirationField.getText().matches("\\d{2}/\\d{2}")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Payment");
-            alert.setHeaderText("Incorrect Expiry");
-            alert.setContentText("Please enter 2 digits for the month, /, and 2 digits for the year (mm/yy).");
-            alert.showAndWait();
-            return;
-        }
 
-        if(!billingZipField.getText().matches("\\d{5}")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Invalid Payment");
-            alert.setHeaderText("Incorrect zip code");
-            alert.setContentText("Please enter 5 digits for the zip code.");
+            alert.setHeaderText("Invalid Payment Information");
+            alert.setContentText(validationError);
+
             alert.showAndWait();
+
             return;
         }
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
         alert.setTitle("Booking success");
         alert.setHeaderText("Payment Received");
-        alert.setContentText("Payment has been received, please proceed to view your booking.");
+
+        alert.setContentText(
+                "Payment has been received, please proceed to view your booking."
+        );
+
         alert.showAndWait();
 
         SceneManager.<BookingHistoryController>switchToScene(
-            "BookingHistory",
-            controller -> controller.setNewBooking(
-                movie,
-                showtime,
-                selectedSeats
-            )
+                "BookingHistory",
+                controller -> controller.setNewBooking(
+                        movie,
+                        showtime,
+                        selectedSeats
+                )
         );
     }
 
