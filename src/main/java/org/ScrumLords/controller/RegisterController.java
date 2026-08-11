@@ -17,6 +17,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * Controls the Register view.
+ * Submits new account registrations to the UserService and
+ * navigates to MainPage on success.
+ *
+ * @author C. Wichman
+ * @version 1.0
+ * @since 2026-08-06
+ */
 public class RegisterController {
 
     private final UserService userService = new UserService();

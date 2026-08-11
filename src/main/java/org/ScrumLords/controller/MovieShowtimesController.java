@@ -21,6 +21,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author A. Garcia
  * @version 1.0
+ * @since 2026-06-29
  */
 public class MovieShowtimesController {
 
@@ -57,7 +58,7 @@ public class MovieShowtimesController {
             return;
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy - h:mm a");
 
         for (Showtime showtime : showtimes) {
             Button showtimeButton = new Button(

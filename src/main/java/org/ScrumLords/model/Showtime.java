@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
  *
  * @author A. Garcia
  * @version 1.0
+ * @since 2026-07-29
  */
 public class Showtime {
     private int showtimeId;
@@ -20,8 +21,8 @@ public class Showtime {
     /**
      * Constructs a Showtime object.
      *
-     * @param showtimeID unique identifier for the showtime
-     * @param movieID identifier of the associated movie
+     * @param showtimeId unique identifier for the showtime
+     * @param movieId identifier of the associated movie
      * @param startTime scheduled start time
      * @param endTime scheduled end time
      */

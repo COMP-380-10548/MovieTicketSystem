@@ -94,10 +94,16 @@ Navigate to the project directory:
 cd MovieTicketSystem
 ```
 
+Create and modify the .env file:
+
+```bash
+cp .env.example .env
+```
+
 Run the application:
 
 ```bash
-mvn clean javafx:run
+mvnw clean javafx:run
 ```
 
 > **Note:** Payment processing is currently simulated for demonstration purposes.
