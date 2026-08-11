@@ -25,6 +25,8 @@
                   </ImageView>
                </children>
             </Pane>
+            <Label text="Username:" />
+            <TextField fx:id="usernameField" promptText="Username" />
             <Label text="First and Last Name:" />
             <HBox alignment="CENTER_LEFT" spacing="20.0">
                <children>
