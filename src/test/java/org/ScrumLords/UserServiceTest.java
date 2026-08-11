@@ -16,13 +16,16 @@ public class UserServiceTest {
     @Test
     @DisplayName("authenticate with correct credentials")
     void authenticate_correct() {
+        // Create a temporary test user with a randomized name
         String username = "testuser" + UUID.randomUUID().toString().substring(0,8);
-        userService.register(username, "test", "user", username + "@example.com", "password123");
+        User tempUser = userService.register(username, "test", "user", username + "@example.com", "password123");
 
         User result = userService.authenticate(username, "password123");
 
         assertNotNull(result);
         assertEquals(username, result.getUsername());
+
+        userService.deleteUser(tempUser.getUserId());
     }
 
 }

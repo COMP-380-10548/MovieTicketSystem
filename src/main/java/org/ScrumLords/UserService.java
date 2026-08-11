@@ -16,6 +16,7 @@ import org.bson.types.ObjectId;
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.result.UpdateResult;
 
 /**
  * Handles user authentication and registration against the users collection via the DatabaseService.
@@ -110,10 +111,23 @@ public class UserService {
             .append("email", email)
         );
 
-        users.updateOne(filter, update);
+        UpdateResult result = users.updateOne(filter, update);
+        if(result.getMatchedCount() == 0)
+            return null;
 
         Document doc = users.find(filter).first();
         return toUser(doc);
+    }
+
+    public boolean deleteUser(String userId) {
+        Document filter = new Document("_id", new ObjectId(userId));
+        Document update = new Document("$set", new Document("deleted", true)
+            .append("username", "deleted_" + userId)
+            .append("password", "")
+        );
+
+        UpdateResult result = users.updateOne(filter, update);
+        return result.getMatchedCount() > 0;
     }
 
     /**
