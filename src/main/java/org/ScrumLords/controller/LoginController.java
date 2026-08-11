@@ -7,11 +7,15 @@ import org.ScrumLords.model.User;
 
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Controls the Login view.
@@ -37,6 +41,11 @@ public class LoginController {
 
     @FXML
     private Label statusLabel;
+
+    @FXML
+    private ImageView logoImage;
+
+    private javafx.scene.image.Image logo;
 
     public void submitLogin(ActionEvent e) {
 
@@ -85,5 +94,9 @@ public class LoginController {
 
     public void goBack(ActionEvent e) {
         SceneManager.goBack();
+    }
+
+    public void handleLogoClick(MouseEvent event) {
+        SceneManager.switchToScene("MainPage", null);
     }
 }
