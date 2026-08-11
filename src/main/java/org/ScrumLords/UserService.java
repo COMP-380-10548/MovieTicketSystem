@@ -29,7 +29,7 @@ import com.mongodb.client.result.UpdateResult;
 public class UserService {
     // Reference https://regexr.com/
     // Patterns ensure fields are in a valid alphanumeric format
-    private static final Pattern USERNAME_PATTERN = Pattern.compile("[a-z0-9]+");
+    private static final Pattern USERNAME_PATTERN = Pattern.compile("[a-z0-9_.-]+");
     private static final Pattern EMAIL_PATTERN = Pattern.compile("[a-z0-9_.-]+@[a-z0-9.-]+.[a-z]+");
 
     private final MongoCollection<Document> users;
@@ -72,8 +72,9 @@ public class UserService {
         lastName = lastName.trim();
         email = email.trim().toLowerCase();
 
-        if(!(verifyUsername(username) && verifyNames(firstName, lastName) && verifyEmail(email) && verifyPassword(password)))
+        if(!(verifyUsername(username) && verifyNames(firstName, lastName) && verifyEmail(email) && verifyPassword(password))) {
             return null;
+        }
 
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
