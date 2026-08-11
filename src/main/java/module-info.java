@@ -8,6 +8,7 @@ module org.ScrumLords {
     requires io.github.cdimascio.dotenv.java;
     requires org.mongodb.bson;
     requires jbcrypt;
+    requires org.junit.jupiter.api;
 
     opens org.ScrumLords to javafx.fxml;
     opens org.ScrumLords.controller to javafx.fxml;
