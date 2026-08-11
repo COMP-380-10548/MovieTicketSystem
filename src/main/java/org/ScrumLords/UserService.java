@@ -16,6 +16,7 @@ import org.bson.types.ObjectId;
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.result.UpdateResult;
 
 /**
  * Handles user authentication and registration against the users collection via the DatabaseService.
@@ -28,7 +29,7 @@ import com.mongodb.client.MongoCollection;
 public class UserService {
     // Reference https://regexr.com/
     // Patterns ensure fields are in a valid alphanumeric format
-    private static final Pattern USERNAME_PATTERN = Pattern.compile("[a-z0-9]+");
+    private static final Pattern USERNAME_PATTERN = Pattern.compile("[a-z0-9_.-]+");
     private static final Pattern EMAIL_PATTERN = Pattern.compile("[a-z0-9_.-]+@[a-z0-9.-]+.[a-z]+");
 
     private final MongoCollection<Document> users;
@@ -71,8 +72,9 @@ public class UserService {
         lastName = lastName.trim();
         email = email.trim().toLowerCase();
 
-        if(!(verifyUsername(username) && verifyNames(firstName, lastName) && verifyEmail(email) && verifyPassword(password)))
+        if(!(verifyUsername(username) && verifyNames(firstName, lastName) && verifyEmail(email) && verifyPassword(password))) {
             return null;
+        }
 
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
@@ -110,10 +112,23 @@ public class UserService {
             .append("email", email)
         );
 
-        users.updateOne(filter, update);
+        UpdateResult result = users.updateOne(filter, update);
+        if(result.getMatchedCount() == 0)
+            return null;
 
         Document doc = users.find(filter).first();
         return toUser(doc);
+    }
+
+    public boolean deleteUser(String userId) {
+        Document filter = new Document("_id", new ObjectId(userId));
+        Document update = new Document("$set", new Document("deleted", true)
+            .append("username", "deleted_" + userId)
+            .append("password", "")
+        );
+
+        UpdateResult result = users.updateOne(filter, update);
+        return result.getMatchedCount() > 0;
     }
 
     /**
