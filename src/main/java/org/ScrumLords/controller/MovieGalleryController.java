@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 import java.util.List;
 
@@ -44,6 +45,11 @@ public class MovieGalleryController {
 
     @FXML
     private GridPane movieGallery;
+
+    @FXML
+    private ImageView logoImage;
+
+    private javafx.scene.image.Image logo;
 
     /**
      * Filters the displayed movies using the text entered in the search field.
@@ -157,6 +163,16 @@ public class MovieGalleryController {
         Platform.runLater(() -> backButton.requestFocus());
 
         displayMovies(movies);
+    }
+
+    /**
+     * Returns the user to the Main Page when the logo is clicked.
+     *
+     * @param event the logo click event
+     */
+    @FXML
+    public void handleLogoClick(MouseEvent event) {
+        SceneManager.switchToScene("MainPage", null);
     }
 
     /**

@@ -7,12 +7,25 @@ import org.ScrumLords.model.User;
 
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+/**
+ * Controls the Login view.
+ * Authenticates user credentials against the UserService and
+ * stores the resulting user in the session on success.
+ *
+ * @author C. Wichman
+ * @version 1.0
+ * @since 2026-06-25
+ */
 public class LoginController {
 
     private final UserService userService = new UserService();
@@ -28,6 +41,11 @@ public class LoginController {
 
     @FXML
     private Label statusLabel;
+
+    @FXML
+    private ImageView logoImage;
+
+    private javafx.scene.image.Image logo;
 
     public void submitLogin(ActionEvent e) {
 
@@ -76,5 +94,9 @@ public class LoginController {
 
     public void goBack(ActionEvent e) {
         SceneManager.goBack();
+    }
+
+    public void handleLogoClick(MouseEvent event) {
+        SceneManager.switchToScene("MainPage", null);
     }
 }

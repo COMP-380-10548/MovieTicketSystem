@@ -12,6 +12,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class RegisterController {
 
@@ -28,6 +32,11 @@ public class RegisterController {
 
     @FXML
     private Label statusLabel;
+
+    @FXML
+    private ImageView logoImage;
+
+    private javafx.scene.image.Image logo;
 
     public void submitRegistration(ActionEvent e) {
 
@@ -83,5 +92,9 @@ public class RegisterController {
         passwordField.setDisable(state);
         registerButton.setDisable(state);
         statusLabel.setVisible(!state);
+    }
+
+    public void handleLogoClick(MouseEvent event) {
+        SceneManager.switchToScene("MainPage", null);
     }
 }
