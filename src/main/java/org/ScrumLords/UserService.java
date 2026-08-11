@@ -50,6 +50,10 @@ public class UserService {
         if(doc == null)
             return null;
 
+        // getBoolean can be null since deleted status is only added to users after-the-fact
+        if(Boolean.TRUE.equals(doc.getBoolean("deleted")))
+            return null;
+
         String storedHash = doc.getString("password");
         if(!BCrypt.checkpw(password, storedHash))
             return null;
@@ -106,6 +110,10 @@ public class UserService {
         if(!(verifyNames(firstName, lastName) && verifyEmail(email)))
             return null;
 
+        // Make sure objectId is formatted properly to avoid exceptions
+        if(!ObjectId.isValid(userId))
+            return null;
+
         Document filter = new Document("_id", new ObjectId(userId));
         Document update = new Document("$set", new Document("firstName", firstName)
             .append("lastName", lastName)
@@ -120,7 +128,16 @@ public class UserService {
         return toUser(doc);
     }
 
+    /**
+     * Retire a user account and set it to a deleted state
+     * @param userId The userId String of the of the desired user to delete.
+     * @return A boolean of whether or not the user was deleted successfully.
+     */
     public boolean deleteUser(String userId) {
+        // Make sure objectId is formatted properly to avoid exceptions
+        if(!ObjectId.isValid(userId))
+            return false;
+
         Document filter = new Document("_id", new ObjectId(userId));
         Document update = new Document("$set", new Document("deleted", true)
             .append("username", "deleted_" + userId)
