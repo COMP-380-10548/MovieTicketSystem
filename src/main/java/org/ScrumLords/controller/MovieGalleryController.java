@@ -83,83 +83,225 @@ public class MovieGalleryController {
     }
 
     /**
-     * Initializes the movie gallery with sample movie and showtime data,
-     * then displays the available movies.
+     * Initializes the movie gallery with temporary demo movie and showtime data.
+     * This data will be replaced with database-backed movie data.
      */
     @FXML
     public void initialize() {
         movies = new ArrayList<>();
 
-        List<Showtime> interstellarShowtimes = List.of(
-            new Showtime(
-                1,       // showtime ID
-                1,          // movie ID (Interstellar)
-                LocalDateTime.of(2026, 8, 2, 18, 30),  // 6:30 PM
-                LocalDateTime.of(2026, 8, 2, 21, 19)   // End time
-            ),
-            new Showtime(
-                2,
-                1,
-                LocalDateTime.of(2026, 8, 2, 22, 15),  // 10:15 PM
-                LocalDateTime.of(2026, 8, 3, 1, 4)     // Ends after midnight
-            )
-        );
+    List<Showtime> interstellarShowtimes = List.of(
+        new Showtime(
+            1,
+            1,
+            LocalDateTime.of(2026, 8, 13, 18, 30),
+            LocalDateTime.of(2026, 8, 13, 21, 19)
+        ),
+        new Showtime(
+            2,
+            1,
+            LocalDateTime.of(2026, 8, 13, 22, 15),
+            LocalDateTime.of(2026, 8, 14, 1, 4)
+        )
+    );
 
-        List<Showtime> duneShowtimes = List.of(
-            new Showtime(
-                3,
-                2,
-                LocalDateTime.of(2026, 8, 2, 13, 0),
-                LocalDateTime.of(2026, 8, 2, 15, 35)
-            ),
-            new Showtime(
-                4,
-                2,
-                LocalDateTime.of(2026, 8, 2, 16, 45),
-                LocalDateTime.of(2026, 8, 2, 19, 20)
-            ),
-            new Showtime(
-                5,
-                2,
-                LocalDateTime.of(2026, 8, 2, 20, 30),
-                LocalDateTime.of(2026, 8, 2, 23, 5)
-            )
-        );
+    List<Showtime> duneShowtimes = List.of(
+        new Showtime(
+            3,
+            2,
+            LocalDateTime.of(2026, 8, 13, 13, 0),
+            LocalDateTime.of(2026, 8, 13, 15, 35)
+        ),
+        new Showtime(
+            4,
+            2,
+            LocalDateTime.of(2026, 8, 13, 16, 45),
+            LocalDateTime.of(2026, 8, 13, 19, 20)
+        ),
+        new Showtime(
+            5,
+            2,
+            LocalDateTime.of(2026, 8, 13, 20, 30),
+            LocalDateTime.of(2026, 8, 13, 23, 5)
+        )
+    );
 
-        List<Showtime> minecraftShowtimes = List.of(
-            new Showtime(
-                6,
-                3,
-                LocalDateTime.of(2026, 8, 2, 12, 0),
-                LocalDateTime.of(2026, 8, 2, 13, 41)
-            ),
-            new Showtime(
-                7,
-                3,
-                LocalDateTime.of(2026, 8, 2, 14, 30),
-                LocalDateTime.of(2026, 8, 2, 16, 11)
-            )
-        );
+    List<Showtime> minecraftShowtimes = List.of(
+        new Showtime(
+            6,
+            3,
+            LocalDateTime.of(2026, 8, 13, 12, 0),
+            LocalDateTime.of(2026, 8, 13, 13, 41)
+        ),
+        new Showtime(
+            7,
+            3,
+            LocalDateTime.of(2026, 8, 14, 14, 30),
+            LocalDateTime.of(2026, 8, 14, 16, 11)
+        )
+    );
 
-        List<Showtime> batmanShowtimes = List.of(
-            new Showtime(
-                8,
-                4,
-                LocalDateTime.of(2026, 8, 2, 19, 0),
-                LocalDateTime.of(2026, 8, 2, 21, 56)
-            ),
-            new Showtime(
-                9,
-                4,
-                LocalDateTime.of(2026, 8, 2, 21, 45),
-                LocalDateTime.of(2026, 8, 3, 0, 41)
-            )
-        );
+    List<Showtime> batmanShowtimes = List.of(
+        new Showtime(
+            8,
+            4,
+            LocalDateTime.of(2026, 8, 13, 19, 0),
+            LocalDateTime.of(2026, 8, 13, 21, 56)
+        ),
+        new Showtime(
+            9,
+            4,
+            LocalDateTime.of(2026, 8, 13, 22, 15),
+            LocalDateTime.of(2026, 8, 14, 1, 11)
+        )
+    );
 
-        movies.add(new Movie("1a", "Interstellar", "PG13", 169, null, "space exploration","/org/ScrumLords/images/interstellar.jpg", interstellarShowtimes));
-        movies.add(new Movie("2a", "Dune", "PG-13", 155, null, "Science fiction adventure","/org/ScrumLords/images/dune.jpg", duneShowtimes));
-        movies.add(new Movie("3a", "Minecraft", "PG", 101, null, "Fantasy adventure","/org/ScrumLords/images/minecraft.jpg", minecraftShowtimes));
-        movies.add(new Movie("4a", "Batman", "PG-13", 176, null, "Superhero crime drama","/org/ScrumLords/images/batman.jpg", batmanShowtimes));
+    List<Showtime> oppenheimerShowtimes = List.of(
+        new Showtime(
+            10,
+            5,
+            LocalDateTime.of(2026, 8, 15, 13, 0),
+            LocalDateTime.of(2026, 8, 15, 16, 0)
+        ),
+        new Showtime(
+            11,
+            5,
+            LocalDateTime.of(2026, 8, 15, 18, 30),
+            LocalDateTime.of(2026, 8, 15, 21, 30)
+        )
+    );
+
+    List<Showtime> marioShowtimes = List.of(
+        new Showtime(
+            12,
+            6,
+            LocalDateTime.of(2026, 8, 15, 12, 30),
+            LocalDateTime.of(2026, 8, 15, 14, 2)
+        ),
+        new Showtime(
+            13,
+            6,
+            LocalDateTime.of(2026, 8, 15, 15, 30),
+            LocalDateTime.of(2026, 8, 15, 17, 2)
+        )
+    );
+
+    List<Showtime> spiderManShowtimes = List.of(
+        new Showtime(
+            14,
+            7,
+            LocalDateTime.of(2026, 8, 15, 14, 0),
+            LocalDateTime.of(2026, 8, 15, 16, 20)
+        ),
+        new Showtime(
+            15,
+            7,
+            LocalDateTime.of(2026, 8, 15, 19, 0),
+            LocalDateTime.of(2026, 8, 15, 21, 20)
+        )
+    );
+
+    List<Showtime> topGunShowtimes = List.of(
+        new Showtime(
+            16,
+            8,
+            LocalDateTime.of(2026, 8, 15, 16, 0),
+            LocalDateTime.of(2026, 8, 15, 18, 11)
+        ),
+        new Showtime(
+            17,
+            8,
+            LocalDateTime.of(2026, 8, 15, 20, 0),
+            LocalDateTime.of(2026, 8, 15, 22, 11)
+        )
+    );
+
+        movies.add(new Movie(
+            "1a",
+            "Interstellar",
+            "PG13", 
+            169, 
+            null, 
+            "space exploration",
+            "/org/ScrumLords/images/interstellar.jpg", 
+            interstellarShowtimes));
+
+        movies.add(new Movie(
+            "2a", 
+            "Dune", 
+            "PG-13", 
+            155, 
+            null, 
+            "Science fiction adventure",
+            "/org/ScrumLords/images/dune.jpg", 
+            duneShowtimes
+        ));
+
+        movies.add(new Movie(
+            "3a",
+            "Minecraft",
+            "PG", 
+            101, 
+            null, 
+            "Fantasy adventure",
+            "/org/ScrumLords/images/minecraft.jpg", 
+            minecraftShowtimes
+        ));
+
+        movies.add(new Movie(
+            "4a",
+            "Batman",
+            "PG-13",
+            176,
+            null,
+            "Superhero crime drama",
+            "/org/ScrumLords/images/batman.jpg",
+            batmanShowtimes
+        ));
+
+        movies.add(new Movie(
+            "5a",
+            "Oppenheimer",
+            "R",
+            180,
+            null,
+            "Historical drama about the development of the atomic bomb",
+            "/org/ScrumLords/images/oppenheimer.jpg",
+            oppenheimerShowtimes
+        ));
+
+        movies.add(new Movie(
+            "6a",
+            "The Super Mario Bros. Movie",
+            "PG",
+            92,
+            null,
+            "Animated adventure through the Mushroom Kingdom",
+            "/org/ScrumLords/images/mario.jpg",
+            marioShowtimes
+        ));
+
+        movies.add(new Movie(
+            "7a",
+            "Spider-Man: Across the Spider-Verse",
+            "PG",
+            140,
+            null,
+            "Animated superhero adventure across the multiverse",
+            "/org/ScrumLords/images/spiderman.jpg",
+            spiderManShowtimes
+        ));
+
+        movies.add(new Movie(
+            "8a",
+            "Top Gun: Maverick",
+            "PG-13",
+            131,
+            null,
+            "Action drama about an elite group of Navy fighter pilots",
+            "/org/ScrumLords/images/topgun.jpg",
+            topGunShowtimes
+        ));
 
         Platform.runLater(() -> backButton.requestFocus());
 
