@@ -33,7 +33,7 @@
 
                         <ListView fx:id="upcomingBookingsListView" prefHeight="190.0" prefWidth="480.0" />
 
-                        <Button fx:id="cancelBookingButton" mnemonicParsing="false" prefWidth="120.0" text="Cancel Selected" />
+                        <Button fx:id="cancelBookingButton" mnemonicParsing="false" onAction="#handleCancelBooking" prefWidth="120.0" text="Cancel Selected" />
 
                     </children>
 
