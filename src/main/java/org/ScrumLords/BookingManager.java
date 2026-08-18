@@ -17,4 +17,8 @@ public class BookingManager {
     public static List<String> getBookings() {
         return bookings;
     }
+
+    public static void removeBooking(String booking) {
+        bookings.remove(booking);
+    }
 }

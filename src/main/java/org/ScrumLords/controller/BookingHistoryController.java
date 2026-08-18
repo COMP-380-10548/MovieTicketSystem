@@ -1,8 +1,5 @@
 package org.ScrumLords.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.ScrumLords.SceneManager;
 import org.ScrumLords.model.Movie;
 import org.ScrumLords.model.Seat;
@@ -11,12 +8,13 @@ import org.ScrumLords.BookingManager;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import javafx.scene.control.Alert;
 
 public class BookingHistoryController {
 
@@ -77,6 +75,26 @@ public class BookingHistoryController {
     @FXML
     private void handleCancelBooking(ActionEvent event) {
 
+        String selectedBooking =
+                upcomingBookingsListView.getSelectionModel().getSelectedItem();
+
+        if (selectedBooking == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("No Booking Selected");
+            alert.setHeaderText("Select a booking");
+            alert.setContentText("Please select an upcoming booking to cancel.");
+            alert.showAndWait();
+            return;
+        }
+
+        BookingManager.removeBooking(selectedBooking);
+        upcomingBookingsListView.getItems().remove(selectedBooking);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Booking Cancelled");
+        alert.setHeaderText("Booking Cancelled");
+        alert.setContentText("Your booking has been cancelled.");
+        alert.showAndWait();
     }
 
 
