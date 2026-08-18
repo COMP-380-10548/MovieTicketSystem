@@ -92,9 +92,15 @@ public class TicketSelectionController {
      * and enabled state of the confirm button.
      */
     private void updateSelectionSummary() {
-        String seatNames = selectedSeats.stream()
-                .map(Seat::getSeatNumber)
-                .collect(Collectors.joining(", "));
+        StringBuilder seatNames = new StringBuilder();
+
+        for (Seat seat : selectedSeats) {
+            if (seatNames.length() > 0) {
+                seatNames.append(", ");
+            }
+
+            seatNames.append(seat.getSeatNumber());
+        }
 
         if (selectedSeats.isEmpty()) {
             selectedSeatsLabel.setText("Selected seats: None");

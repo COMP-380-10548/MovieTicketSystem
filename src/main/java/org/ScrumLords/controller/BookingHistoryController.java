@@ -7,6 +7,7 @@ import org.ScrumLords.SceneManager;
 import org.ScrumLords.model.Movie;
 import org.ScrumLords.model.Seat;
 import org.ScrumLords.model.Showtime;
+import org.ScrumLords.BookingManager;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,13 +33,7 @@ public class BookingHistoryController {
     @FXML
     public void initialize() {
         upcomingBookingsListView.getItems().addAll(
-            "Superman | Aug 8 | 7:00 PM | A1, A2",
-            "Fantastic Four | Aug 10 | 6:30 PM | C4"
-        );
-
-        previousBookingsListView.getItems().addAll(
-            "Dune | Jul 28 | 8:00 PM | F5",
-            "Deadpool | Jul 20 | 5:30 PM | B2, B3"
+            BookingManager.getBookings()
         );
     }
 
@@ -65,6 +60,8 @@ public class BookingHistoryController {
                 movie.getTitle() + " | " +
                 showtime.getStartTime().format(formatter) + " | " +
                 seatNames;
+
+        BookingManager.addBooking(booking);
 
         upcomingBookingsListView.getItems().add(booking);
     }

@@ -62,7 +62,7 @@ public class MovieGalleryController {
     private void handleSearch(ActionEvent event) {
         String searchText = searchField.getText().toLowerCase();
         List<Movie> filteredMovies = new ArrayList<>();
-        System.out.println("Searching for: " + searchText);
+        //System.out.println("Searching for: " + searchText);
 
         for (Movie movie : movies) {
             if (movie.getTitle().toLowerCase().contains(searchText)) 
