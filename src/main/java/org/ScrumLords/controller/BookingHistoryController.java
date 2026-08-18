@@ -14,8 +14,17 @@ import javafx.scene.control.ListView;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.control.Alert;
 
+/**
+ * Controls the Booking History view.
+ * Displays upcoming bookings, receives newly completed bookings,
+ * allows users to cancel selected bookings, and manages navigation
+ * back to the main page.
+ *
+ * @author A. Garcia
+ * @version 1.0
+ * @since 2026-08-07
+ */
 public class BookingHistoryController {
 
     private Movie movie;
@@ -28,6 +37,11 @@ public class BookingHistoryController {
     @FXML
     private ListView<String> previousBookingsListView;
 
+    /**
+     * Initializes the Booking History view.
+     * Loads bookings stored during the current application session
+     * into the upcoming bookings list.
+     */
     @FXML
     public void initialize() {
         upcomingBookingsListView.getItems().addAll(
@@ -35,7 +49,16 @@ public class BookingHistoryController {
         );
     }
 
- 
+    /**
+     * Adds a newly completed booking to the booking history.
+     * Formats the selected movie, showtime, and seats for display,
+     * stores the booking for the current application session, and
+     * adds it to the upcoming bookings list.
+     *
+     * @param movie the movie associated with the new booking
+     * @param showtime the selected showtime for the movie
+     * @param selectedSeats the seats selected for the booking
+     */
     public void setNewBooking(
             Movie movie,
             Showtime showtime,
@@ -64,6 +87,11 @@ public class BookingHistoryController {
         upcomingBookingsListView.getItems().add(booking);
     }
 
+    /**
+     * Returns the user from the Booking History view to the Main Page.
+     *
+     * @param event the button event that triggers the navigation
+     */
     @FXML
     private void returnToMainPage(ActionEvent event) {
         SceneManager.switchToScene(
@@ -72,6 +100,14 @@ public class BookingHistoryController {
         );
     }
 
+    /**
+     * Cancels the currently selected upcoming booking.
+     * Displays an error if no booking is selected. If a booking is
+     * selected, it is removed from session storage and from the
+     * upcoming bookings list.
+     *
+     * @param event the button event that triggers the cancellation
+     */
     @FXML
     private void handleCancelBooking(ActionEvent event) {
 
@@ -96,6 +132,4 @@ public class BookingHistoryController {
         alert.setContentText("Your booking has been cancelled.");
         alert.showAndWait();
     }
-
-
 }
